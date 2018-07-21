@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.DeliverydestinationMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.Deliverydestination">
+    <id column="DELIVERYDESTINATION_ID" jdbcType="DECIMAL" property="deliverydestinationId" />
+    <result column="LINE" jdbcType="VARCHAR" property="line" />
+    <result column="CITYNAME" jdbcType="VARCHAR" property="cityname" />
+    <result column="COUNTRYSUBENTITYID" jdbcType="VARCHAR" property="countrysubentityid" />
+    <result column="COUNTRYSUBENTITYNAME" jdbcType="VARCHAR" property="countrysubentityname" />
+    <result column="POSTCODEID" jdbcType="VARCHAR" property="postcodeid" />
+    <result column="COUNTRYCODE" jdbcType="VARCHAR" property="countrycode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DELIVERYDESTINATION_ID, LINE, CITYNAME, COUNTRYSUBENTITYID, COUNTRYSUBENTITYNAME, 
+    POSTCODEID, COUNTRYCODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   DELIVERYDESTINATION
+    where DELIVERYDESTINATION_ID = #{deliverydestinationId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from   DELIVERYDESTINATION
+    where DELIVERYDESTINATION_ID = #{deliverydestinationId,jdbcType=DECIMAL}
+  </delete>
+
+  <insert id="insert" parameterType="com.gdin.report.entity.Deliverydestination">
+
+    <selectKey keyProperty="deliverydestinationId" order="BEFORE" resultType="DECIMAL">
+      SELECT DELIVERYDESTINATION_SEQ.nextval deliverydestinationId from dual
+    </selectKey>
+
+    insert into   DELIVERYDESTINATION (DELIVERYDESTINATION_ID, LINE, CITYNAME,
+      COUNTRYSUBENTITYID, COUNTRYSUBENTITYNAME, 
+      POSTCODEID, COUNTRYCODE)
+    values (#{deliverydestinationId,jdbcType=DECIMAL}, #{line,jdbcType=VARCHAR}, #{cityname,jdbcType=VARCHAR}, 
+      #{countrysubentityid,jdbcType=VARCHAR}, #{countrysubentityname,jdbcType=VARCHAR}, 
+      #{postcodeid,jdbcType=VARCHAR}, #{countrycode,jdbcType=VARCHAR})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.Deliverydestination">
+    insert into   DELIVERYDESTINATION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deliverydestinationId != null">
+        DELIVERYDESTINATION_ID,
+      </if>
+      <if test="line != null">
+        LINE,
+      </if>
+      <if test="cityname != null">
+        CITYNAME,
+      </if>
+      <if test="countrysubentityid != null">
+        COUNTRYSUBENTITYID,
+      </if>
+      <if test="countrysubentityname != null">
+        COUNTRYSUBENTITYNAME,
+      </if>
+      <if test="postcodeid != null">
+        POSTCODEID,
+      </if>
+      <if test="countrycode != null">
+        COUNTRYCODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deliverydestinationId != null">
+        #{deliverydestinationId,jdbcType=DECIMAL},
+      </if>
+      <if test="line != null">
+        #{line,jdbcType=VARCHAR},
+      </if>
+      <if test="cityname != null">
+        #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="countrysubentityid != null">
+        #{countrysubentityid,jdbcType=VARCHAR},
+      </if>
+      <if test="countrysubentityname != null">
+        #{countrysubentityname,jdbcType=VARCHAR},
+      </if>
+      <if test="postcodeid != null">
+        #{postcodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="countrycode != null">
+        #{countrycode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.Deliverydestination">
+    update   DELIVERYDESTINATION
+    <set>
+      <if test="line != null">
+        LINE = #{line,jdbcType=VARCHAR},
+      </if>
+      <if test="cityname != null">
+        CITYNAME = #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="countrysubentityid != null">
+        COUNTRYSUBENTITYID = #{countrysubentityid,jdbcType=VARCHAR},
+      </if>
+      <if test="countrysubentityname != null">
+        COUNTRYSUBENTITYNAME = #{countrysubentityname,jdbcType=VARCHAR},
+      </if>
+      <if test="postcodeid != null">
+        POSTCODEID = #{postcodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="countrycode != null">
+        COUNTRYCODE = #{countrycode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DELIVERYDESTINATION_ID = #{deliverydestinationId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.Deliverydestination">
+    update   DELIVERYDESTINATION
+    set LINE = #{line,jdbcType=VARCHAR},
+      CITYNAME = #{cityname,jdbcType=VARCHAR},
+      COUNTRYSUBENTITYID = #{countrysubentityid,jdbcType=VARCHAR},
+      COUNTRYSUBENTITYNAME = #{countrysubentityname,jdbcType=VARCHAR},
+      POSTCODEID = #{postcodeid,jdbcType=VARCHAR},
+      COUNTRYCODE = #{countrycode,jdbcType=VARCHAR}
+    where DELIVERYDESTINATION_ID = #{deliverydestinationId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.PackingEquipmentMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.PackingEquipment">
+    <id column="PACKING_EQUIPMENT_ID" jdbcType="DECIMAL" property="packingEquipmentId" />
+    <result column="PACKING_REPORT_ID" jdbcType="VARCHAR" property="packingReportId" />
+    <result column="TRANSPORTEQUIPMENT_ID" jdbcType="VARCHAR" property="transportequipmentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PACKING_EQUIPMENT_ID, PACKING_REPORT_ID, TRANSPORTEQUIPMENT_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   PACKING_EQUIPMENT
+    where PACKING_EQUIPMENT_ID = #{packingEquipmentId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from   PACKING_EQUIPMENT
+    where PACKING_EQUIPMENT_ID = #{packingEquipmentId,jdbcType=DECIMAL}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.gdin.report.entity.PackingEquipment">
+
+    <selectKey keyProperty="packingEquipmentId" order="BEFORE" resultType="DECIMAL">
+      SELECT PACKING_EQUIPMENT_SEQ.nextval packingEquipmentId from dual
+    </selectKey>
+
+    insert into   PACKING_EQUIPMENT (PACKING_EQUIPMENT_ID, PACKING_REPORT_ID,
+      TRANSPORTEQUIPMENT_ID)
+    values (#{packingEquipmentId,jdbcType=DECIMAL}, #{packingReportId,jdbcType=VARCHAR}, 
+      #{transportequipmentId,jdbcType=VARCHAR})
+  </insert>
+
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.PackingEquipment">
+    insert into   PACKING_EQUIPMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="packingEquipmentId != null">
+        PACKING_EQUIPMENT_ID,
+      </if>
+      <if test="packingReportId != null">
+        PACKING_REPORT_ID,
+      </if>
+      <if test="transportequipmentId != null">
+        TRANSPORTEQUIPMENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="packingEquipmentId != null">
+        #{packingEquipmentId,jdbcType=DECIMAL},
+      </if>
+      <if test="packingReportId != null">
+        #{packingReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="transportequipmentId != null">
+        #{transportequipmentId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.PackingEquipment">
+    update   PACKING_EQUIPMENT
+    <set>
+      <if test="packingReportId != null">
+        PACKING_REPORT_ID = #{packingReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="transportequipmentId != null">
+        TRANSPORTEQUIPMENT_ID = #{transportequipmentId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PACKING_EQUIPMENT_ID = #{packingEquipmentId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.PackingEquipment">
+    update   PACKING_EQUIPMENT
+    set PACKING_REPORT_ID = #{packingReportId,jdbcType=VARCHAR},
+      TRANSPORTEQUIPMENT_ID = #{transportequipmentId,jdbcType=VARCHAR}
+    where PACKING_EQUIPMENT_ID = #{packingEquipmentId,jdbcType=DECIMAL}
+  </update>
+</mapper>

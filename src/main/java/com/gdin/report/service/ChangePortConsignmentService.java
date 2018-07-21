@@ -1,0 +1,38 @@
+package com.gdin.report.service;
+
+import com.gdin.report.dao.ChangePortConsignmentMapper;
+import com.gdin.report.entity.ChangePortConsignment;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+
+@Service
+public class ChangePortConsignmentService {
+    @Autowired
+    private ChangePortConsignmentMapper changePortConsignmentMapper;
+
+    int deleteByPrimaryKey(BigDecimal changePortConsignmentId){
+        return changePortConsignmentMapper.deleteByPrimaryKey(changePortConsignmentId);
+    }
+
+    int insert(ChangePortConsignment record){
+        return changePortConsignmentMapper.insert(record);
+    }
+
+    int insertSelective(ChangePortConsignment record){
+        return changePortConsignmentMapper.insertSelective(record);
+    }
+
+    ChangePortConsignment selectByPrimaryKey(BigDecimal changePortConsignmentId){
+        return changePortConsignmentMapper.selectByPrimaryKey(changePortConsignmentId);
+    }
+
+    int updateByPrimaryKeySelective(ChangePortConsignment record){
+        return changePortConsignmentMapper.updateByPrimaryKeySelective(record);
+    }
+
+    int updateByPrimaryKey(ChangePortConsignment record){
+        return changePortConsignmentMapper.updateByPrimaryKey(record);
+    }
+}

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.Message">
+    <id column="COPMSGID" jdbcType="VARCHAR" property="copmsgid" />
+    <result column="MSGTYPE" jdbcType="VARCHAR" property="msgtype" />
+    <result column="MESSAGEID" jdbcType="VARCHAR" property="messageid" />
+    <result column="FUNCTIONCODE" jdbcType="VARCHAR" property="functioncode" />
+    <result column="MESSAGETYPE" jdbcType="VARCHAR" property="messagetype" />
+    <result column="SENDERID" jdbcType="VARCHAR" property="senderid" />
+    <result column="RECEIVERID" jdbcType="VARCHAR" property="receiverid" />
+    <result column="SENDTIME" jdbcType="VARCHAR" property="sendtime" />
+    <result column="VERSION" jdbcType="VARCHAR" property="version" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.gdin.report.entity.Message">
+    <result column="MESSAGEBODY" jdbcType="CLOB" property="messagebody" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    COPMSGID, MSGTYPE, MESSAGEID, FUNCTIONCODE, MESSAGETYPE, SENDERID, RECEIVERID, SENDTIME, 
+    VERSION
+  </sql>
+  <sql id="Blob_Column_List">
+    MESSAGEBODY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from MESSAGE
+    where COPMSGID = #{copmsgid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from MESSAGE
+    where COPMSGID = #{copmsgid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gdin.report.entity.Message">
+    insert into MESSAGE (COPMSGID, MSGTYPE, MESSAGEID, 
+      FUNCTIONCODE, MESSAGETYPE, SENDERID, 
+      RECEIVERID, SENDTIME, VERSION, 
+      MESSAGEBODY)
+    values (#{copmsgid,jdbcType=VARCHAR}, #{msgtype,jdbcType=VARCHAR}, #{messageid,jdbcType=VARCHAR}, 
+      #{functioncode,jdbcType=VARCHAR}, #{messagetype,jdbcType=VARCHAR}, #{senderid,jdbcType=VARCHAR}, 
+      #{receiverid,jdbcType=VARCHAR}, #{sendtime,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, 
+      #{messagebody,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.Message">
+    insert into MESSAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="copmsgid != null">
+        COPMSGID,
+      </if>
+      <if test="msgtype != null">
+        MSGTYPE,
+      </if>
+      <if test="messageid != null">
+        MESSAGEID,
+      </if>
+      <if test="functioncode != null">
+        FUNCTIONCODE,
+      </if>
+      <if test="messagetype != null">
+        MESSAGETYPE,
+      </if>
+      <if test="senderid != null">
+        SENDERID,
+      </if>
+      <if test="receiverid != null">
+        RECEIVERID,
+      </if>
+      <if test="sendtime != null">
+        SENDTIME,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="messagebody != null">
+        MESSAGEBODY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="copmsgid != null">
+        #{copmsgid,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtype != null">
+        #{msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="messageid != null">
+        #{messageid,jdbcType=VARCHAR},
+      </if>
+      <if test="functioncode != null">
+        #{functioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetype != null">
+        #{messagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="senderid != null">
+        #{senderid,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverid != null">
+        #{receiverid,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null">
+        #{sendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="messagebody != null">
+        #{messagebody,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.Message">
+    update MESSAGE
+    <set>
+      <if test="msgtype != null">
+        MSGTYPE = #{msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="messageid != null">
+        MESSAGEID = #{messageid,jdbcType=VARCHAR},
+      </if>
+      <if test="functioncode != null">
+        FUNCTIONCODE = #{functioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetype != null">
+        MESSAGETYPE = #{messagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="senderid != null">
+        SENDERID = #{senderid,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverid != null">
+        RECEIVERID = #{receiverid,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null">
+        SENDTIME = #{sendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="messagebody != null">
+        MESSAGEBODY = #{messagebody,jdbcType=CLOB},
+      </if>
+    </set>
+    where COPMSGID = #{copmsgid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gdin.report.entity.Message">
+    update MESSAGE
+    set MSGTYPE = #{msgtype,jdbcType=VARCHAR},
+      MESSAGEID = #{messageid,jdbcType=VARCHAR},
+      FUNCTIONCODE = #{functioncode,jdbcType=VARCHAR},
+      MESSAGETYPE = #{messagetype,jdbcType=VARCHAR},
+      SENDERID = #{senderid,jdbcType=VARCHAR},
+      RECEIVERID = #{receiverid,jdbcType=VARCHAR},
+      SENDTIME = #{sendtime,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=VARCHAR},
+      MESSAGEBODY = #{messagebody,jdbcType=CLOB}
+    where COPMSGID = #{copmsgid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.Message">
+    update MESSAGE
+    set MSGTYPE = #{msgtype,jdbcType=VARCHAR},
+      MESSAGEID = #{messageid,jdbcType=VARCHAR},
+      FUNCTIONCODE = #{functioncode,jdbcType=VARCHAR},
+      MESSAGETYPE = #{messagetype,jdbcType=VARCHAR},
+      SENDERID = #{senderid,jdbcType=VARCHAR},
+      RECEIVERID = #{receiverid,jdbcType=VARCHAR},
+      SENDTIME = #{sendtime,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=VARCHAR}
+    where COPMSGID = #{copmsgid,jdbcType=VARCHAR}
+  </update>
+</mapper>

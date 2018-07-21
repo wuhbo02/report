@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.TransportequipmentSealidMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.TransportequipmentSealid">
+    <id column="TRANSPORTEQUIPMENT_SEALID_ID" jdbcType="DECIMAL" property="transportequipmentSealidId" />
+    <result column="TRANSPORTEQUIPMENT_ID" jdbcType="VARCHAR" property="transportequipmentId" />
+    <result column="SEALID" jdbcType="VARCHAR" property="sealid" />
+    <result column="AGENCYCODE" jdbcType="VARCHAR" property="agencycode" />
+    <result column="COPMSGID" jdbcType="VARCHAR" property="copmsgid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TRANSPORTEQUIPMENT_SEALID_ID, TRANSPORTEQUIPMENT_ID, SEALID, AGENCYCODE, COPMSGID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TRANSPORTEQUIPMENT_SEALID
+    where TRANSPORTEQUIPMENT_SEALID_ID = #{transportequipmentSealidId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from TRANSPORTEQUIPMENT_SEALID
+    where TRANSPORTEQUIPMENT_SEALID_ID = #{transportequipmentSealidId,jdbcType=DECIMAL}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.gdin.report.entity.TransportequipmentSealid">
+    <selectKey keyProperty="transportequipmentSealidId" order="BEFORE" resultType="DECIMAL">
+      SELECT TRANSPORTEQUIPMENT_SEALID_SEQ.nextval transportequipmentSealidId from dual
+    </selectKey>
+
+    insert into TRANSPORTEQUIPMENT_SEALID (TRANSPORTEQUIPMENT_SEALID_ID, TRANSPORTEQUIPMENT_ID, 
+      SEALID, AGENCYCODE, COPMSGID
+      )
+    values (#{transportequipmentSealidId,jdbcType=DECIMAL}, #{transportequipmentId,jdbcType=VARCHAR}, 
+      #{sealid,jdbcType=VARCHAR}, #{agencycode,jdbcType=VARCHAR}, #{copmsgid,jdbcType=VARCHAR}
+      )
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.TransportequipmentSealid">
+    insert into TRANSPORTEQUIPMENT_SEALID
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="transportequipmentSealidId != null">
+        TRANSPORTEQUIPMENT_SEALID_ID,
+      </if>
+      <if test="transportequipmentId != null">
+        TRANSPORTEQUIPMENT_ID,
+      </if>
+      <if test="sealid != null">
+        SEALID,
+      </if>
+      <if test="agencycode != null">
+        AGENCYCODE,
+      </if>
+      <if test="copmsgid != null">
+        COPMSGID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="transportequipmentSealidId != null">
+        #{transportequipmentSealidId,jdbcType=DECIMAL},
+      </if>
+      <if test="transportequipmentId != null">
+        #{transportequipmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="sealid != null">
+        #{sealid,jdbcType=VARCHAR},
+      </if>
+      <if test="agencycode != null">
+        #{agencycode,jdbcType=VARCHAR},
+      </if>
+      <if test="copmsgid != null">
+        #{copmsgid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.TransportequipmentSealid">
+    update TRANSPORTEQUIPMENT_SEALID
+    <set>
+      <if test="transportequipmentId != null">
+        TRANSPORTEQUIPMENT_ID = #{transportequipmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="sealid != null">
+        SEALID = #{sealid,jdbcType=VARCHAR},
+      </if>
+      <if test="agencycode != null">
+        AGENCYCODE = #{agencycode,jdbcType=VARCHAR},
+      </if>
+      <if test="copmsgid != null">
+        COPMSGID = #{copmsgid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TRANSPORTEQUIPMENT_SEALID_ID = #{transportequipmentSealidId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.TransportequipmentSealid">
+    update TRANSPORTEQUIPMENT_SEALID
+    set TRANSPORTEQUIPMENT_ID = #{transportequipmentId,jdbcType=VARCHAR},
+      SEALID = #{sealid,jdbcType=VARCHAR},
+      AGENCYCODE = #{agencycode,jdbcType=VARCHAR},
+      COPMSGID = #{copmsgid,jdbcType=VARCHAR}
+    where TRANSPORTEQUIPMENT_SEALID_ID = #{transportequipmentSealidId,jdbcType=DECIMAL}
+  </update>
+</mapper>

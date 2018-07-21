@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.ContactCommunicationMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.ContactCommunication">
+    <id column="CONTACT_COMMUNICATION_ID" jdbcType="DECIMAL" property="contactCommunicationId" />
+    <result column="CONTACT_ID" jdbcType="VARCHAR" property="contactId" />
+    <result column="COMMUNICATION_ID" jdbcType="VARCHAR" property="communicationId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CONTACT_COMMUNICATION_ID, CONTACT_ID, COMMUNICATION_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CONTACT_COMMUNICATION
+    where CONTACT_COMMUNICATION_ID = #{contactCommunicationId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from CONTACT_COMMUNICATION
+    where CONTACT_COMMUNICATION_ID = #{contactCommunicationId,jdbcType=DECIMAL}
+  </delete>
+
+  <insert id="insert" parameterType="com.gdin.report.entity.ContactCommunication">
+    <selectKey keyProperty="contactCommunicationId" order="BEFORE" resultType="DECIMAL">
+      SELECT CONTACT_COMMUNICATION_SEQ.nextval contactCommunicationId from dual
+    </selectKey>
+
+    insert into CONTACT_COMMUNICATION (CONTACT_COMMUNICATION_ID, CONTACT_ID, 
+      COMMUNICATION_ID)
+    values (#{contactCommunicationId,jdbcType=DECIMAL}, #{contactId,jdbcType=VARCHAR}, 
+      #{communicationId,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.ContactCommunication">
+    insert into CONTACT_COMMUNICATION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contactCommunicationId != null">
+        CONTACT_COMMUNICATION_ID,
+      </if>
+      <if test="contactId != null">
+        CONTACT_ID,
+      </if>
+      <if test="communicationId != null">
+        COMMUNICATION_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contactCommunicationId != null">
+        #{contactCommunicationId,jdbcType=DECIMAL},
+      </if>
+      <if test="contactId != null">
+        #{contactId,jdbcType=VARCHAR},
+      </if>
+      <if test="communicationId != null">
+        #{communicationId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.ContactCommunication">
+    update CONTACT_COMMUNICATION
+    <set>
+      <if test="contactId != null">
+        CONTACT_ID = #{contactId,jdbcType=VARCHAR},
+      </if>
+      <if test="communicationId != null">
+        COMMUNICATION_ID = #{communicationId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CONTACT_COMMUNICATION_ID = #{contactCommunicationId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.ContactCommunication">
+    update CONTACT_COMMUNICATION
+    set CONTACT_ID = #{contactId,jdbcType=VARCHAR},
+      COMMUNICATION_ID = #{communicationId,jdbcType=VARCHAR}
+    where CONTACT_COMMUNICATION_ID = #{contactCommunicationId,jdbcType=DECIMAL}
+  </update>
+</mapper>

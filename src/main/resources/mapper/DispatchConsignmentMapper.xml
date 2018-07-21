@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.DispatchConsignmentMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.DispatchConsignment">
+    <id column="DISPATCH_CONSIGNMENT_ID" jdbcType="DECIMAL" property="dispatchConsignmentId" />
+    <result column="DISPATCH_REPORT_ID" jdbcType="VARCHAR" property="dispatchReportId" />
+    <result column="CONSIGNMENT_ID" jdbcType="DECIMAL" property="consignmentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DISPATCH_CONSIGNMENT_ID, DISPATCH_REPORT_ID, CONSIGNMENT_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   DISPATCH_CONSIGNMENT
+    where DISPATCH_CONSIGNMENT_ID = #{dispatchConsignmentId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from   DISPATCH_CONSIGNMENT
+    where DISPATCH_CONSIGNMENT_ID = #{dispatchConsignmentId,jdbcType=DECIMAL}
+  </delete>
+
+  <insert id="insert" parameterType="com.gdin.report.entity.DispatchConsignment">
+    <selectKey keyProperty="dispatchConsignmentId" order="BEFORE" resultType="DECIMAL">
+      SELECT DISPATCH_CONSIGNMENT_SEQ.nextval dispatchConsignmentId from dual
+    </selectKey>
+
+    insert into   DISPATCH_CONSIGNMENT (DISPATCH_CONSIGNMENT_ID, DISPATCH_REPORT_ID,
+      CONSIGNMENT_ID)
+    values (#{dispatchConsignmentId,jdbcType=DECIMAL}, #{dispatchReportId,jdbcType=VARCHAR}, 
+      #{consignmentId,jdbcType=DECIMAL})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.DispatchConsignment">
+    insert into   DISPATCH_CONSIGNMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dispatchConsignmentId != null">
+        DISPATCH_CONSIGNMENT_ID,
+      </if>
+      <if test="dispatchReportId != null">
+        DISPATCH_REPORT_ID,
+      </if>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dispatchConsignmentId != null">
+        #{dispatchConsignmentId,jdbcType=DECIMAL},
+      </if>
+      <if test="dispatchReportId != null">
+        #{dispatchReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentId != null">
+        #{consignmentId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.DispatchConsignment">
+    update   DISPATCH_CONSIGNMENT
+    <set>
+      <if test="dispatchReportId != null">
+        DISPATCH_REPORT_ID = #{dispatchReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where DISPATCH_CONSIGNMENT_ID = #{dispatchConsignmentId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.DispatchConsignment">
+    update   DISPATCH_CONSIGNMENT
+    set DISPATCH_REPORT_ID = #{dispatchReportId,jdbcType=VARCHAR},
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL}
+    where DISPATCH_CONSIGNMENT_ID = #{dispatchConsignmentId,jdbcType=DECIMAL}
+  </update>
+</mapper>

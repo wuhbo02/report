@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.TransportequipmentMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.Transportequipment">
+    <id column="TRANSPORTEQUIPMENT_ID" jdbcType="VARCHAR" property="transportequipmentId" />
+    <result column="CHARACTERISTICCODE" jdbcType="VARCHAR" property="characteristiccode" />
+    <result column="SUPPLIERPARTYTYPECODE" jdbcType="VARCHAR" property="supplierpartytypecode" />
+    <result column="FULLNESSCODE" jdbcType="VARCHAR" property="fullnesscode" />
+    <result column="STOWAGELOCATIONID" jdbcType="VARCHAR" property="stowagelocationid" />
+    <result column="LOADINGLOCATIONID" jdbcType="VARCHAR" property="loadinglocationid" />
+    <result column="LOADINGDATE" jdbcType="VARCHAR" property="loadingdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TRANSPORTEQUIPMENT_ID, CHARACTERISTICCODE, SUPPLIERPARTYTYPECODE, FULLNESSCODE, STOWAGELOCATIONID, 
+    LOADINGLOCATIONID, LOADINGDATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TRANSPORTEQUIPMENT
+    where TRANSPORTEQUIPMENT_ID = #{transportequipmentId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TRANSPORTEQUIPMENT
+    where TRANSPORTEQUIPMENT_ID = #{transportequipmentId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gdin.report.entity.Transportequipment">
+    insert into TRANSPORTEQUIPMENT (TRANSPORTEQUIPMENT_ID, CHARACTERISTICCODE, 
+      SUPPLIERPARTYTYPECODE, FULLNESSCODE, STOWAGELOCATIONID, 
+      LOADINGLOCATIONID, LOADINGDATE)
+    values (#{transportequipmentId,jdbcType=VARCHAR}, #{characteristiccode,jdbcType=VARCHAR}, 
+      #{supplierpartytypecode,jdbcType=VARCHAR}, #{fullnesscode,jdbcType=VARCHAR}, #{stowagelocationid,jdbcType=VARCHAR}, 
+      #{loadinglocationid,jdbcType=VARCHAR}, #{loadingdate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.Transportequipment">
+    insert into TRANSPORTEQUIPMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="transportequipmentId != null">
+        TRANSPORTEQUIPMENT_ID,
+      </if>
+      <if test="characteristiccode != null">
+        CHARACTERISTICCODE,
+      </if>
+      <if test="supplierpartytypecode != null">
+        SUPPLIERPARTYTYPECODE,
+      </if>
+      <if test="fullnesscode != null">
+        FULLNESSCODE,
+      </if>
+      <if test="stowagelocationid != null">
+        STOWAGELOCATIONID,
+      </if>
+      <if test="loadinglocationid != null">
+        LOADINGLOCATIONID,
+      </if>
+      <if test="loadingdate != null">
+        LOADINGDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="transportequipmentId != null">
+        #{transportequipmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="characteristiccode != null">
+        #{characteristiccode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierpartytypecode != null">
+        #{supplierpartytypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="fullnesscode != null">
+        #{fullnesscode,jdbcType=VARCHAR},
+      </if>
+      <if test="stowagelocationid != null">
+        #{stowagelocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="loadinglocationid != null">
+        #{loadinglocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="loadingdate != null">
+        #{loadingdate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.Transportequipment">
+    update TRANSPORTEQUIPMENT
+    <set>
+      <if test="characteristiccode != null">
+        CHARACTERISTICCODE = #{characteristiccode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierpartytypecode != null">
+        SUPPLIERPARTYTYPECODE = #{supplierpartytypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="fullnesscode != null">
+        FULLNESSCODE = #{fullnesscode,jdbcType=VARCHAR},
+      </if>
+      <if test="stowagelocationid != null">
+        STOWAGELOCATIONID = #{stowagelocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="loadinglocationid != null">
+        LOADINGLOCATIONID = #{loadinglocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="loadingdate != null">
+        LOADINGDATE = #{loadingdate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TRANSPORTEQUIPMENT_ID = #{transportequipmentId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.Transportequipment">
+    update TRANSPORTEQUIPMENT
+    set CHARACTERISTICCODE = #{characteristiccode,jdbcType=VARCHAR},
+      SUPPLIERPARTYTYPECODE = #{supplierpartytypecode,jdbcType=VARCHAR},
+      FULLNESSCODE = #{fullnesscode,jdbcType=VARCHAR},
+      STOWAGELOCATIONID = #{stowagelocationid,jdbcType=VARCHAR},
+      LOADINGLOCATIONID = #{loadinglocationid,jdbcType=VARCHAR},
+      LOADINGDATE = #{loadingdate,jdbcType=VARCHAR}
+    where TRANSPORTEQUIPMENT_ID = #{transportequipmentId,jdbcType=VARCHAR}
+  </update>
+</mapper>

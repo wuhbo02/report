@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.ConsignmentTransportMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.ConsignmentTransport">
+    <id column="CONSIGNMENT_TRANSPORT_ID" jdbcType="DECIMAL" property="consignmentTransportId" />
+    <result column="CONSIGNMENT_ID" jdbcType="DECIMAL" property="consignmentId" />
+    <result column="BORDERTRANSPORTMEANS_ID" jdbcType="DECIMAL" property="bordertransportmeansId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CONSIGNMENT_TRANSPORT_ID, CONSIGNMENT_ID, BORDERTRANSPORTMEANS_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   CONSIGNMENT_TRANSPORT
+    where CONSIGNMENT_TRANSPORT_ID = #{consignmentTransportId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from   CONSIGNMENT_TRANSPORT
+    where CONSIGNMENT_TRANSPORT_ID = #{consignmentTransportId,jdbcType=DECIMAL}
+  </delete>
+
+  <insert id="insert" parameterType="com.gdin.report.entity.ConsignmentTransport">
+    <selectKey keyProperty="consignmentTransportId" order="BEFORE" resultType="DECIMAL">
+      SELECT CONSIGNMENT_TRANSPORT_SEQ.nextval consignmentTransportId from dual
+    </selectKey>
+
+    insert into   CONSIGNMENT_TRANSPORT (CONSIGNMENT_TRANSPORT_ID, CONSIGNMENT_ID,
+      BORDERTRANSPORTMEANS_ID)
+    values (#{consignmentTransportId,jdbcType=DECIMAL}, #{consignmentId,jdbcType=DECIMAL}, 
+      #{bordertransportmeansId,jdbcType=DECIMAL})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.ConsignmentTransport">
+    insert into   CONSIGNMENT_TRANSPORT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="consignmentTransportId != null">
+        CONSIGNMENT_TRANSPORT_ID,
+      </if>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID,
+      </if>
+      <if test="bordertransportmeansId != null">
+        BORDERTRANSPORTMEANS_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="consignmentTransportId != null">
+        #{consignmentTransportId,jdbcType=DECIMAL},
+      </if>
+      <if test="consignmentId != null">
+        #{consignmentId,jdbcType=DECIMAL},
+      </if>
+      <if test="bordertransportmeansId != null">
+        #{bordertransportmeansId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.ConsignmentTransport">
+    update   CONSIGNMENT_TRANSPORT
+    <set>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL},
+      </if>
+      <if test="bordertransportmeansId != null">
+        BORDERTRANSPORTMEANS_ID = #{bordertransportmeansId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where CONSIGNMENT_TRANSPORT_ID = #{consignmentTransportId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.ConsignmentTransport">
+    update   CONSIGNMENT_TRANSPORT
+    set CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL},
+      BORDERTRANSPORTMEANS_ID = #{bordertransportmeansId,jdbcType=DECIMAL}
+    where CONSIGNMENT_TRANSPORT_ID = #{consignmentTransportId,jdbcType=DECIMAL}
+  </update>
+</mapper>

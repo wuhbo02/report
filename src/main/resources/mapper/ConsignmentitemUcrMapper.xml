@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.ConsignmentitemUcrMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.ConsignmentitemUcr">
+    <id column="CONSIGNMENTITEM_UCR_ID" jdbcType="DECIMAL" property="consignmentitemUcrId" />
+    <result column="CONSIGNMENTITEM_ID" jdbcType="DECIMAL" property="consignmentitemId" />
+    <result column="URC_ID" jdbcType="VARCHAR" property="urcId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CONSIGNMENTITEM_UCR_ID, CONSIGNMENTITEM_ID, URC_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   CONSIGNMENTITEM_UCR
+    where CONSIGNMENTITEM_UCR_ID = #{consignmentitemUcrId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from   CONSIGNMENTITEM_UCR
+    where CONSIGNMENTITEM_UCR_ID = #{consignmentitemUcrId,jdbcType=DECIMAL}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.gdin.report.entity.ConsignmentitemUcr">
+    <selectKey keyProperty="consignmentitemUcrId" order="BEFORE" resultType="DECIMAL">
+      SELECT CONSIGNMENTITEM_UCR_SEQ.nextval consignmentitemUcrId from dual
+    </selectKey>
+
+    insert into   CONSIGNMENTITEM_UCR (CONSIGNMENTITEM_UCR_ID, CONSIGNMENTITEM_ID,
+      URC_ID)
+    values (#{consignmentitemUcrId,jdbcType=DECIMAL}, #{consignmentitemId,jdbcType=DECIMAL}, 
+      #{urcId,jdbcType=VARCHAR})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.ConsignmentitemUcr">
+    insert into   CONSIGNMENTITEM_UCR
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="consignmentitemUcrId != null">
+        CONSIGNMENTITEM_UCR_ID,
+      </if>
+      <if test="consignmentitemId != null">
+        CONSIGNMENTITEM_ID,
+      </if>
+      <if test="urcId != null">
+        URC_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="consignmentitemUcrId != null">
+        #{consignmentitemUcrId,jdbcType=DECIMAL},
+      </if>
+      <if test="consignmentitemId != null">
+        #{consignmentitemId,jdbcType=DECIMAL},
+      </if>
+      <if test="urcId != null">
+        #{urcId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.ConsignmentitemUcr">
+    update   CONSIGNMENTITEM_UCR
+    <set>
+      <if test="consignmentitemId != null">
+        CONSIGNMENTITEM_ID = #{consignmentitemId,jdbcType=DECIMAL},
+      </if>
+      <if test="urcId != null">
+        URC_ID = #{urcId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CONSIGNMENTITEM_UCR_ID = #{consignmentitemUcrId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.ConsignmentitemUcr">
+    update   CONSIGNMENTITEM_UCR
+    set CONSIGNMENTITEM_ID = #{consignmentitemId,jdbcType=DECIMAL},
+      URC_ID = #{urcId,jdbcType=VARCHAR}
+    where CONSIGNMENTITEM_UCR_ID = #{consignmentitemUcrId,jdbcType=DECIMAL}
+  </update>
+</mapper>

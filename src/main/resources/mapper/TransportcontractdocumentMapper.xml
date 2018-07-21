@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.TransportcontractdocumentMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.Transportcontractdocument">
+    <id column="TRANSPORTCONTRACTDOCUMENT_ID" jdbcType="VARCHAR" property="transportcontractdocumentId" />
+    <result column="CHANGEREASONCODE" jdbcType="VARCHAR" property="changereasoncode" />
+    <result column="CONDITIONCODE" jdbcType="VARCHAR" property="conditioncode" />
+    <result column="DECONSOLIDATOR" jdbcType="VARCHAR" property="deconsolidator" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TRANSPORTCONTRACTDOCUMENT_ID, CHANGEREASONCODE, CONDITIONCODE, DECONSOLIDATOR
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   TRANSPORTCONTRACTDOCUMENT
+    where TRANSPORTCONTRACTDOCUMENT_ID = #{transportcontractdocumentId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from   TRANSPORTCONTRACTDOCUMENT
+    where TRANSPORTCONTRACTDOCUMENT_ID = #{transportcontractdocumentId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gdin.report.entity.Transportcontractdocument">
+    insert into   TRANSPORTCONTRACTDOCUMENT (TRANSPORTCONTRACTDOCUMENT_ID, CHANGEREASONCODE,
+      CONDITIONCODE, DECONSOLIDATOR)
+    values (#{transportcontractdocumentId,jdbcType=VARCHAR}, #{changereasoncode,jdbcType=VARCHAR}, 
+      #{conditioncode,jdbcType=VARCHAR}, #{deconsolidator,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.Transportcontractdocument">
+    insert into   TRANSPORTCONTRACTDOCUMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="transportcontractdocumentId != null">
+        TRANSPORTCONTRACTDOCUMENT_ID,
+      </if>
+      <if test="changereasoncode != null">
+        CHANGEREASONCODE,
+      </if>
+      <if test="conditioncode != null">
+        CONDITIONCODE,
+      </if>
+      <if test="deconsolidator != null">
+        DECONSOLIDATOR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="transportcontractdocumentId != null">
+        #{transportcontractdocumentId,jdbcType=VARCHAR},
+      </if>
+      <if test="changereasoncode != null">
+        #{changereasoncode,jdbcType=VARCHAR},
+      </if>
+      <if test="conditioncode != null">
+        #{conditioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="deconsolidator != null">
+        #{deconsolidator,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.Transportcontractdocument">
+    update   TRANSPORTCONTRACTDOCUMENT
+    <set>
+      <if test="changereasoncode != null">
+        CHANGEREASONCODE = #{changereasoncode,jdbcType=VARCHAR},
+      </if>
+      <if test="conditioncode != null">
+        CONDITIONCODE = #{conditioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="deconsolidator != null">
+        DECONSOLIDATOR = #{deconsolidator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TRANSPORTCONTRACTDOCUMENT_ID = #{transportcontractdocumentId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.Transportcontractdocument">
+    update   TRANSPORTCONTRACTDOCUMENT
+    set CHANGEREASONCODE = #{changereasoncode,jdbcType=VARCHAR},
+      CONDITIONCODE = #{conditioncode,jdbcType=VARCHAR},
+      DECONSOLIDATOR = #{deconsolidator,jdbcType=VARCHAR}
+    where TRANSPORTCONTRACTDOCUMENT_ID = #{transportcontractdocumentId,jdbcType=VARCHAR}
+  </update>
+</mapper>

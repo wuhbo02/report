@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.ArrivalEquipmentMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.ArrivalEquipment">
+    <id column="ARRIVAL_EQUIPMENT_ID" jdbcType="DECIMAL" property="arrivalEquipmentId" />
+    <result column="ARRIVAL_REPORT_ID" jdbcType="VARCHAR" property="arrivalReportId" />
+    <result column="TRANSPORTEQUIPMENT_ID" jdbcType="VARCHAR" property="transportequipmentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ARRIVAL_EQUIPMENT_ID, ARRIVAL_REPORT_ID, TRANSPORTEQUIPMENT_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   ARRIVAL_EQUIPMENT
+    where ARRIVAL_EQUIPMENT_ID = #{arrivalEquipmentId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from   ARRIVAL_EQUIPMENT
+    where ARRIVAL_EQUIPMENT_ID = #{arrivalEquipmentId,jdbcType=DECIMAL}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.gdin.report.entity.ArrivalEquipment">
+
+    <selectKey keyProperty="arrivalEquipmentId" order="BEFORE" resultType="DECIMAL">
+      SELECT ARRIVAL_EQUIPMENT_SEQ.nextval arrivalEquipmentId from dual
+    </selectKey>
+
+    insert into   ARRIVAL_EQUIPMENT (ARRIVAL_EQUIPMENT_ID, ARRIVAL_REPORT_ID,
+      TRANSPORTEQUIPMENT_ID)
+    values (#{arrivalEquipmentId,jdbcType=DECIMAL}, #{arrivalReportId,jdbcType=VARCHAR}, 
+      #{transportequipmentId,jdbcType=VARCHAR})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.ArrivalEquipment">
+    insert into   ARRIVAL_EQUIPMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="arrivalEquipmentId != null">
+        ARRIVAL_EQUIPMENT_ID,
+      </if>
+      <if test="arrivalReportId != null">
+        ARRIVAL_REPORT_ID,
+      </if>
+      <if test="transportequipmentId != null">
+        TRANSPORTEQUIPMENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="arrivalEquipmentId != null">
+        #{arrivalEquipmentId,jdbcType=DECIMAL},
+      </if>
+      <if test="arrivalReportId != null">
+        #{arrivalReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="transportequipmentId != null">
+        #{transportequipmentId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.ArrivalEquipment">
+    update   ARRIVAL_EQUIPMENT
+    <set>
+      <if test="arrivalReportId != null">
+        ARRIVAL_REPORT_ID = #{arrivalReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="transportequipmentId != null">
+        TRANSPORTEQUIPMENT_ID = #{transportequipmentId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ARRIVAL_EQUIPMENT_ID = #{arrivalEquipmentId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.ArrivalEquipment">
+    update   ARRIVAL_EQUIPMENT
+    set ARRIVAL_REPORT_ID = #{arrivalReportId,jdbcType=VARCHAR},
+      TRANSPORTEQUIPMENT_ID = #{transportequipmentId,jdbcType=VARCHAR}
+    where ARRIVAL_EQUIPMENT_ID = #{arrivalEquipmentId,jdbcType=DECIMAL}
+  </update>
+</mapper>

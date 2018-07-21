@@ -1,0 +1,10 @@
+在Oracle安装目录下查找Oracle JDBC Driver ；例如：D:\oracle\product\11.2.0\dbhome_1\jdbc\lib ；
+WIN+R启动控制台，切换至D:\oracle\product\11.2.0\dbhome_1\jdbc\lib ；
+运行：mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.1.0 -Dpackaging=jar -Dfile=ojdbc6.jar
+在pom.xml中添加:
+
+<dependency>
+   <groupId>com.oracle</groupId>
+   <artifactId>ojdbc6</artifactId>
+   <version>11.2.0.1.0</version>
+</dependency>

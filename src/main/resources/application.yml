@@ -1,0 +1,24 @@
+server:
+  port: 8090
+
+spring:
+  datasource:
+     db1:
+       type: com.alibaba.druid.pool.DruidDataSource
+       driverClassName: oracle.jdbc.driver.OracleDriver
+       url: jdbc:oracle:thin:@127.0.0.1:1521:orcl
+       username: imporder
+       password: imporder
+       connectionErrorRetryAttempts: 100000
+       maxActive: 50
+       initialSize: 1
+       maxWait: 60000
+       minIdle: 1
+       timeBetweenEvictionRunsMillis: 60000
+       minEvictableIdleTimeMillis: 300000
+       validationQuery: select 'x' from dual
+       testWhileIdle: true
+       testOnBorrow: false
+       testOnReturn: false
+       poolPreparedStatements: true
+       maxOpenPreparedStatements: 100

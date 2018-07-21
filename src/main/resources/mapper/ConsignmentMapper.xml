@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.ConsignmentMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.Consignment">
+    <id column="CONSIGNMENT_ID" jdbcType="DECIMAL" property="consignmentId" />
+    <result column="TRANSPORTCONTRACTDOCUMENT_ID" jdbcType="VARCHAR" property="transportcontractdocumentId" />
+    <result column="ASSOCIATEDTRANSPORTDOCUMENT" jdbcType="VARCHAR" property="associatedtransportdocument" />
+    <result column="GROSSVOLUMEMEASURE" jdbcType="VARCHAR" property="grossvolumemeasure" />
+    <result column="VALUEAMOUNT" jdbcType="VARCHAR" property="valueamount" />
+    <result column="CURRENCYTYPECODE" jdbcType="VARCHAR" property="currencytypecode" />
+    <result column="LOADINGLOCATIONID" jdbcType="VARCHAR" property="loadinglocationid" />
+    <result column="LOADINGDATE" jdbcType="VARCHAR" property="loadingdate" />
+    <result column="UNLOADINGLOCATIONID" jdbcType="VARCHAR" property="unloadinglocationid" />
+    <result column="ARRIVALDATE" jdbcType="VARCHAR" property="arrivaldate" />
+    <result column="GOODSRECEIPTPLACEID" jdbcType="VARCHAR" property="goodsreceiptplaceid" />
+    <result column="GOODSRECEIPTPLACENAME" jdbcType="VARCHAR" property="goodsreceiptplacename" />
+    <result column="TRANSHIPMENTLOCATIONID" jdbcType="VARCHAR" property="transhipmentlocationid" />
+    <result column="TRANSITDESTINATIONID" jdbcType="VARCHAR" property="transitdestinationid" />
+    <result column="GOODSCONSIGNEDPLACEID" jdbcType="VARCHAR" property="goodsconsignedplaceid" />
+    <result column="TRANSPORTSPLITINDICATOR" jdbcType="VARCHAR" property="transportsplitindicator" />
+    <result column="FREIGHTPAYMENT" jdbcType="VARCHAR" property="freightpayment" />
+    <result column="PACKAGINGTYPECODE" jdbcType="VARCHAR" property="packagingtypecode" />
+    <result column="PACKAGINGQUANTITY" jdbcType="VARCHAR" property="packagingquantity" />
+    <result column="TOTALGROSSMASSMEASURE" jdbcType="VARCHAR" property="totalgrossmassmeasure" />
+    <result column="PRECUSTDOCUMENTID" jdbcType="VARCHAR" property="precustdocumentid" />
+    <result column="PRECUSTDOCUMENTTYPECODE" jdbcType="VARCHAR" property="precustdocumenttypecode" />
+    <result column="DELIVERYDESTINATION_ID" jdbcType="VARCHAR" property="deliverydestinationId" />
+    <result column="HANDLINGINSTRUCTIONSCODE" jdbcType="VARCHAR" property="handlinginstructionscode" />
+    <result column="INTERMEDIATECARRIER_ID" jdbcType="VARCHAR" property="intermediatecarrierId" />
+    <result column="CONSIGNEE_ID" jdbcType="VARCHAR" property="consigneeId" />
+    <result column="CONTACT_ID" jdbcType="VARCHAR" property="contactId" />
+    <result column="CONSIGNOR_ID" jdbcType="VARCHAR" property="consignorId" />
+    <result column="NOTIFYPARTY_ID" jdbcType="VARCHAR" property="notifypartyId" />
+    <result column="UNDGCONTACT_ID" jdbcType="VARCHAR" property="undgcontactId" />
+    <result column="CHANGECONSIGNMENT_ID" jdbcType="DECIMAL" property="changeconsignmentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CONSIGNMENT_ID, TRANSPORTCONTRACTDOCUMENT_ID, ASSOCIATEDTRANSPORTDOCUMENT, GROSSVOLUMEMEASURE, 
+    VALUEAMOUNT, CURRENCYTYPECODE, LOADINGLOCATIONID, LOADINGDATE, UNLOADINGLOCATIONID, 
+    ARRIVALDATE, GOODSRECEIPTPLACEID, GOODSRECEIPTPLACENAME, TRANSHIPMENTLOCATIONID, 
+    TRANSITDESTINATIONID, GOODSCONSIGNEDPLACEID, TRANSPORTSPLITINDICATOR, FREIGHTPAYMENT, 
+    PACKAGINGTYPECODE, PACKAGINGQUANTITY, TOTALGROSSMASSMEASURE, PRECUSTDOCUMENTID, PRECUSTDOCUMENTTYPECODE, 
+    DELIVERYDESTINATION_ID, HANDLINGINSTRUCTIONSCODE, INTERMEDIATECARRIER_ID, CONSIGNEE_ID, 
+    CONTACT_ID, CONSIGNOR_ID, NOTIFYPARTY_ID, UNDGCONTACT_ID, CHANGECONSIGNMENT_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CONSIGNMENT
+    where CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from CONSIGNMENT
+    where CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gdin.report.entity.Consignment">
+
+    <selectKey keyProperty="consignmentId" order="BEFORE" resultType="DECIMAL">
+      SELECT CONSIGNMENT_SEQ.nextval consignmentId from dual
+    </selectKey>
+
+    insert into CONSIGNMENT (CONSIGNMENT_ID, TRANSPORTCONTRACTDOCUMENT_ID, 
+      ASSOCIATEDTRANSPORTDOCUMENT, GROSSVOLUMEMEASURE, 
+      VALUEAMOUNT, CURRENCYTYPECODE, LOADINGLOCATIONID, 
+      LOADINGDATE, UNLOADINGLOCATIONID, ARRIVALDATE, 
+      GOODSRECEIPTPLACEID, GOODSRECEIPTPLACENAME, 
+      TRANSHIPMENTLOCATIONID, TRANSITDESTINATIONID, 
+      GOODSCONSIGNEDPLACEID, TRANSPORTSPLITINDICATOR, 
+      FREIGHTPAYMENT, PACKAGINGTYPECODE, PACKAGINGQUANTITY, 
+      TOTALGROSSMASSMEASURE, PRECUSTDOCUMENTID, 
+      PRECUSTDOCUMENTTYPECODE, DELIVERYDESTINATION_ID, 
+      HANDLINGINSTRUCTIONSCODE, INTERMEDIATECARRIER_ID, 
+      CONSIGNEE_ID, CONTACT_ID, CONSIGNOR_ID, 
+      NOTIFYPARTY_ID, UNDGCONTACT_ID, CHANGECONSIGNMENT_ID
+      )
+    values (#{consignmentId,jdbcType=DECIMAL}, #{transportcontractdocumentId,jdbcType=VARCHAR}, 
+      #{associatedtransportdocument,jdbcType=VARCHAR}, #{grossvolumemeasure,jdbcType=VARCHAR}, 
+      #{valueamount,jdbcType=VARCHAR}, #{currencytypecode,jdbcType=VARCHAR}, #{loadinglocationid,jdbcType=VARCHAR}, 
+      #{loadingdate,jdbcType=VARCHAR}, #{unloadinglocationid,jdbcType=VARCHAR}, #{arrivaldate,jdbcType=VARCHAR}, 
+      #{goodsreceiptplaceid,jdbcType=VARCHAR}, #{goodsreceiptplacename,jdbcType=VARCHAR}, 
+      #{transhipmentlocationid,jdbcType=VARCHAR}, #{transitdestinationid,jdbcType=VARCHAR}, 
+      #{goodsconsignedplaceid,jdbcType=VARCHAR}, #{transportsplitindicator,jdbcType=VARCHAR}, 
+      #{freightpayment,jdbcType=VARCHAR}, #{packagingtypecode,jdbcType=VARCHAR}, #{packagingquantity,jdbcType=VARCHAR}, 
+      #{totalgrossmassmeasure,jdbcType=VARCHAR}, #{precustdocumentid,jdbcType=VARCHAR}, 
+      #{precustdocumenttypecode,jdbcType=VARCHAR}, #{deliverydestinationId,jdbcType=VARCHAR}, 
+      #{handlinginstructionscode,jdbcType=VARCHAR}, #{intermediatecarrierId,jdbcType=VARCHAR}, 
+      #{consigneeId,jdbcType=VARCHAR}, #{contactId,jdbcType=VARCHAR}, #{consignorId,jdbcType=VARCHAR}, 
+      #{notifypartyId,jdbcType=VARCHAR}, #{undgcontactId,jdbcType=VARCHAR}, #{changeconsignmentId,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.Consignment">
+    insert into CONSIGNMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID,
+      </if>
+      <if test="transportcontractdocumentId != null">
+        TRANSPORTCONTRACTDOCUMENT_ID,
+      </if>
+      <if test="associatedtransportdocument != null">
+        ASSOCIATEDTRANSPORTDOCUMENT,
+      </if>
+      <if test="grossvolumemeasure != null">
+        GROSSVOLUMEMEASURE,
+      </if>
+      <if test="valueamount != null">
+        VALUEAMOUNT,
+      </if>
+      <if test="currencytypecode != null">
+        CURRENCYTYPECODE,
+      </if>
+      <if test="loadinglocationid != null">
+        LOADINGLOCATIONID,
+      </if>
+      <if test="loadingdate != null">
+        LOADINGDATE,
+      </if>
+      <if test="unloadinglocationid != null">
+        UNLOADINGLOCATIONID,
+      </if>
+      <if test="arrivaldate != null">
+        ARRIVALDATE,
+      </if>
+      <if test="goodsreceiptplaceid != null">
+        GOODSRECEIPTPLACEID,
+      </if>
+      <if test="goodsreceiptplacename != null">
+        GOODSRECEIPTPLACENAME,
+      </if>
+      <if test="transhipmentlocationid != null">
+        TRANSHIPMENTLOCATIONID,
+      </if>
+      <if test="transitdestinationid != null">
+        TRANSITDESTINATIONID,
+      </if>
+      <if test="goodsconsignedplaceid != null">
+        GOODSCONSIGNEDPLACEID,
+      </if>
+      <if test="transportsplitindicator != null">
+        TRANSPORTSPLITINDICATOR,
+      </if>
+      <if test="freightpayment != null">
+        FREIGHTPAYMENT,
+      </if>
+      <if test="packagingtypecode != null">
+        PACKAGINGTYPECODE,
+      </if>
+      <if test="packagingquantity != null">
+        PACKAGINGQUANTITY,
+      </if>
+      <if test="totalgrossmassmeasure != null">
+        TOTALGROSSMASSMEASURE,
+      </if>
+      <if test="precustdocumentid != null">
+        PRECUSTDOCUMENTID,
+      </if>
+      <if test="precustdocumenttypecode != null">
+        PRECUSTDOCUMENTTYPECODE,
+      </if>
+      <if test="deliverydestinationId != null">
+        DELIVERYDESTINATION_ID,
+      </if>
+      <if test="handlinginstructionscode != null">
+        HANDLINGINSTRUCTIONSCODE,
+      </if>
+      <if test="intermediatecarrierId != null">
+        INTERMEDIATECARRIER_ID,
+      </if>
+      <if test="consigneeId != null">
+        CONSIGNEE_ID,
+      </if>
+      <if test="contactId != null">
+        CONTACT_ID,
+      </if>
+      <if test="consignorId != null">
+        CONSIGNOR_ID,
+      </if>
+      <if test="notifypartyId != null">
+        NOTIFYPARTY_ID,
+      </if>
+      <if test="undgcontactId != null">
+        UNDGCONTACT_ID,
+      </if>
+      <if test="changeconsignmentId != null">
+        CHANGECONSIGNMENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="consignmentId != null">
+        #{consignmentId,jdbcType=DECIMAL},
+      </if>
+      <if test="transportcontractdocumentId != null">
+        #{transportcontractdocumentId,jdbcType=VARCHAR},
+      </if>
+      <if test="associatedtransportdocument != null">
+        #{associatedtransportdocument,jdbcType=VARCHAR},
+      </if>
+      <if test="grossvolumemeasure != null">
+        #{grossvolumemeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="valueamount != null">
+        #{valueamount,jdbcType=VARCHAR},
+      </if>
+      <if test="currencytypecode != null">
+        #{currencytypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="loadinglocationid != null">
+        #{loadinglocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="loadingdate != null">
+        #{loadingdate,jdbcType=VARCHAR},
+      </if>
+      <if test="unloadinglocationid != null">
+        #{unloadinglocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivaldate != null">
+        #{arrivaldate,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsreceiptplaceid != null">
+        #{goodsreceiptplaceid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsreceiptplacename != null">
+        #{goodsreceiptplacename,jdbcType=VARCHAR},
+      </if>
+      <if test="transhipmentlocationid != null">
+        #{transhipmentlocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="transitdestinationid != null">
+        #{transitdestinationid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsconsignedplaceid != null">
+        #{goodsconsignedplaceid,jdbcType=VARCHAR},
+      </if>
+      <if test="transportsplitindicator != null">
+        #{transportsplitindicator,jdbcType=VARCHAR},
+      </if>
+      <if test="freightpayment != null">
+        #{freightpayment,jdbcType=VARCHAR},
+      </if>
+      <if test="packagingtypecode != null">
+        #{packagingtypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="packagingquantity != null">
+        #{packagingquantity,jdbcType=VARCHAR},
+      </if>
+      <if test="totalgrossmassmeasure != null">
+        #{totalgrossmassmeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="precustdocumentid != null">
+        #{precustdocumentid,jdbcType=VARCHAR},
+      </if>
+      <if test="precustdocumenttypecode != null">
+        #{precustdocumenttypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverydestinationId != null">
+        #{deliverydestinationId,jdbcType=VARCHAR},
+      </if>
+      <if test="handlinginstructionscode != null">
+        #{handlinginstructionscode,jdbcType=VARCHAR},
+      </if>
+      <if test="intermediatecarrierId != null">
+        #{intermediatecarrierId,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeId != null">
+        #{consigneeId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactId != null">
+        #{contactId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignorId != null">
+        #{consignorId,jdbcType=VARCHAR},
+      </if>
+      <if test="notifypartyId != null">
+        #{notifypartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="undgcontactId != null">
+        #{undgcontactId,jdbcType=VARCHAR},
+      </if>
+      <if test="changeconsignmentId != null">
+        #{changeconsignmentId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.Consignment">
+    update CONSIGNMENT
+    <set>
+      <if test="transportcontractdocumentId != null">
+        TRANSPORTCONTRACTDOCUMENT_ID = #{transportcontractdocumentId,jdbcType=VARCHAR},
+      </if>
+      <if test="associatedtransportdocument != null">
+        ASSOCIATEDTRANSPORTDOCUMENT = #{associatedtransportdocument,jdbcType=VARCHAR},
+      </if>
+      <if test="grossvolumemeasure != null">
+        GROSSVOLUMEMEASURE = #{grossvolumemeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="valueamount != null">
+        VALUEAMOUNT = #{valueamount,jdbcType=VARCHAR},
+      </if>
+      <if test="currencytypecode != null">
+        CURRENCYTYPECODE = #{currencytypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="loadinglocationid != null">
+        LOADINGLOCATIONID = #{loadinglocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="loadingdate != null">
+        LOADINGDATE = #{loadingdate,jdbcType=VARCHAR},
+      </if>
+      <if test="unloadinglocationid != null">
+        UNLOADINGLOCATIONID = #{unloadinglocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivaldate != null">
+        ARRIVALDATE = #{arrivaldate,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsreceiptplaceid != null">
+        GOODSRECEIPTPLACEID = #{goodsreceiptplaceid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsreceiptplacename != null">
+        GOODSRECEIPTPLACENAME = #{goodsreceiptplacename,jdbcType=VARCHAR},
+      </if>
+      <if test="transhipmentlocationid != null">
+        TRANSHIPMENTLOCATIONID = #{transhipmentlocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="transitdestinationid != null">
+        TRANSITDESTINATIONID = #{transitdestinationid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsconsignedplaceid != null">
+        GOODSCONSIGNEDPLACEID = #{goodsconsignedplaceid,jdbcType=VARCHAR},
+      </if>
+      <if test="transportsplitindicator != null">
+        TRANSPORTSPLITINDICATOR = #{transportsplitindicator,jdbcType=VARCHAR},
+      </if>
+      <if test="freightpayment != null">
+        FREIGHTPAYMENT = #{freightpayment,jdbcType=VARCHAR},
+      </if>
+      <if test="packagingtypecode != null">
+        PACKAGINGTYPECODE = #{packagingtypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="packagingquantity != null">
+        PACKAGINGQUANTITY = #{packagingquantity,jdbcType=VARCHAR},
+      </if>
+      <if test="totalgrossmassmeasure != null">
+        TOTALGROSSMASSMEASURE = #{totalgrossmassmeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="precustdocumentid != null">
+        PRECUSTDOCUMENTID = #{precustdocumentid,jdbcType=VARCHAR},
+      </if>
+      <if test="precustdocumenttypecode != null">
+        PRECUSTDOCUMENTTYPECODE = #{precustdocumenttypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverydestinationId != null">
+        DELIVERYDESTINATION_ID = #{deliverydestinationId,jdbcType=VARCHAR},
+      </if>
+      <if test="handlinginstructionscode != null">
+        HANDLINGINSTRUCTIONSCODE = #{handlinginstructionscode,jdbcType=VARCHAR},
+      </if>
+      <if test="intermediatecarrierId != null">
+        INTERMEDIATECARRIER_ID = #{intermediatecarrierId,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeId != null">
+        CONSIGNEE_ID = #{consigneeId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactId != null">
+        CONTACT_ID = #{contactId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignorId != null">
+        CONSIGNOR_ID = #{consignorId,jdbcType=VARCHAR},
+      </if>
+      <if test="notifypartyId != null">
+        NOTIFYPARTY_ID = #{notifypartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="undgcontactId != null">
+        UNDGCONTACT_ID = #{undgcontactId,jdbcType=VARCHAR},
+      </if>
+      <if test="changeconsignmentId != null">
+        CHANGECONSIGNMENT_ID = #{changeconsignmentId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.Consignment">
+    update CONSIGNMENT
+    set TRANSPORTCONTRACTDOCUMENT_ID = #{transportcontractdocumentId,jdbcType=VARCHAR},
+      ASSOCIATEDTRANSPORTDOCUMENT = #{associatedtransportdocument,jdbcType=VARCHAR},
+      GROSSVOLUMEMEASURE = #{grossvolumemeasure,jdbcType=VARCHAR},
+      VALUEAMOUNT = #{valueamount,jdbcType=VARCHAR},
+      CURRENCYTYPECODE = #{currencytypecode,jdbcType=VARCHAR},
+      LOADINGLOCATIONID = #{loadinglocationid,jdbcType=VARCHAR},
+      LOADINGDATE = #{loadingdate,jdbcType=VARCHAR},
+      UNLOADINGLOCATIONID = #{unloadinglocationid,jdbcType=VARCHAR},
+      ARRIVALDATE = #{arrivaldate,jdbcType=VARCHAR},
+      GOODSRECEIPTPLACEID = #{goodsreceiptplaceid,jdbcType=VARCHAR},
+      GOODSRECEIPTPLACENAME = #{goodsreceiptplacename,jdbcType=VARCHAR},
+      TRANSHIPMENTLOCATIONID = #{transhipmentlocationid,jdbcType=VARCHAR},
+      TRANSITDESTINATIONID = #{transitdestinationid,jdbcType=VARCHAR},
+      GOODSCONSIGNEDPLACEID = #{goodsconsignedplaceid,jdbcType=VARCHAR},
+      TRANSPORTSPLITINDICATOR = #{transportsplitindicator,jdbcType=VARCHAR},
+      FREIGHTPAYMENT = #{freightpayment,jdbcType=VARCHAR},
+      PACKAGINGTYPECODE = #{packagingtypecode,jdbcType=VARCHAR},
+      PACKAGINGQUANTITY = #{packagingquantity,jdbcType=VARCHAR},
+      TOTALGROSSMASSMEASURE = #{totalgrossmassmeasure,jdbcType=VARCHAR},
+      PRECUSTDOCUMENTID = #{precustdocumentid,jdbcType=VARCHAR},
+      PRECUSTDOCUMENTTYPECODE = #{precustdocumenttypecode,jdbcType=VARCHAR},
+      DELIVERYDESTINATION_ID = #{deliverydestinationId,jdbcType=VARCHAR},
+      HANDLINGINSTRUCTIONSCODE = #{handlinginstructionscode,jdbcType=VARCHAR},
+      INTERMEDIATECARRIER_ID = #{intermediatecarrierId,jdbcType=VARCHAR},
+      CONSIGNEE_ID = #{consigneeId,jdbcType=VARCHAR},
+      CONTACT_ID = #{contactId,jdbcType=VARCHAR},
+      CONSIGNOR_ID = #{consignorId,jdbcType=VARCHAR},
+      NOTIFYPARTY_ID = #{notifypartyId,jdbcType=VARCHAR},
+      UNDGCONTACT_ID = #{undgcontactId,jdbcType=VARCHAR},
+      CHANGECONSIGNMENT_ID = #{changeconsignmentId,jdbcType=DECIMAL}
+    where CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL}
+  </update>
+</mapper>

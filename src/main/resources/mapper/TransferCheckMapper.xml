@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.TransferCheckMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.TransferCheck">
+    <id column="TRANSFER_CHECK_ID" jdbcType="VARCHAR" property="transferCheckId" />
+    <result column="DECLARATIONOFFICEID" jdbcType="VARCHAR" property="declarationofficeid" />
+    <result column="MESSAGEID" jdbcType="VARCHAR" property="messageid" />
+    <result column="MESSAGETYPE" jdbcType="VARCHAR" property="messagetype" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TRANSFER_CHECK_ID, DECLARATIONOFFICEID, MESSAGEID, MESSAGETYPE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   TRANSFER_CHECK
+    where TRANSFER_CHECK_ID = #{transferCheckId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from   TRANSFER_CHECK
+    where TRANSFER_CHECK_ID = #{transferCheckId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gdin.report.entity.TransferCheck">
+    insert into   TRANSFER_CHECK (TRANSFER_CHECK_ID, DECLARATIONOFFICEID,
+      MESSAGEID, MESSAGETYPE)
+    values (#{transferCheckId,jdbcType=VARCHAR}, #{declarationofficeid,jdbcType=VARCHAR}, 
+      #{messageid,jdbcType=VARCHAR}, #{messagetype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.TransferCheck">
+    insert into   TRANSFER_CHECK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="transferCheckId != null">
+        TRANSFER_CHECK_ID,
+      </if>
+      <if test="declarationofficeid != null">
+        DECLARATIONOFFICEID,
+      </if>
+      <if test="messageid != null">
+        MESSAGEID,
+      </if>
+      <if test="messagetype != null">
+        MESSAGETYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="transferCheckId != null">
+        #{transferCheckId,jdbcType=VARCHAR},
+      </if>
+      <if test="declarationofficeid != null">
+        #{declarationofficeid,jdbcType=VARCHAR},
+      </if>
+      <if test="messageid != null">
+        #{messageid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetype != null">
+        #{messagetype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.TransferCheck">
+    update   TRANSFER_CHECK
+    <set>
+      <if test="declarationofficeid != null">
+        DECLARATIONOFFICEID = #{declarationofficeid,jdbcType=VARCHAR},
+      </if>
+      <if test="messageid != null">
+        MESSAGEID = #{messageid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetype != null">
+        MESSAGETYPE = #{messagetype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TRANSFER_CHECK_ID = #{transferCheckId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.TransferCheck">
+    update   TRANSFER_CHECK
+    set DECLARATIONOFFICEID = #{declarationofficeid,jdbcType=VARCHAR},
+      MESSAGEID = #{messageid,jdbcType=VARCHAR},
+      MESSAGETYPE = #{messagetype,jdbcType=VARCHAR}
+    where TRANSFER_CHECK_ID = #{transferCheckId,jdbcType=VARCHAR}
+  </update>
+</mapper>

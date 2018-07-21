@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.ChangePortConsignmentMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.ChangePortConsignment">
+    <id column="CHANGE_PORT_CONSIGNMENT_ID" jdbcType="DECIMAL" property="changePortConsignmentId" />
+    <result column="CHANGE_PORT_ID" jdbcType="VARCHAR" property="changePortId" />
+    <result column="CONSIGNMENT_ID" jdbcType="DECIMAL" property="consignmentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CHANGE_PORT_CONSIGNMENT_ID, CHANGE_PORT_ID, CONSIGNMENT_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   CHANGE_PORT_CONSIGNMENT
+    where CHANGE_PORT_CONSIGNMENT_ID = #{changePortConsignmentId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from   CHANGE_PORT_CONSIGNMENT
+    where CHANGE_PORT_CONSIGNMENT_ID = #{changePortConsignmentId,jdbcType=DECIMAL}
+  </delete>
+
+  <insert id="insert" parameterType="com.gdin.report.entity.ChangePortConsignment">
+
+    <selectKey keyProperty="changePortConsignmentId" order="BEFORE" resultType="DECIMAL">
+      SELECT CHANGE_PORT_CONSIGNMENT_SEQ.nextval changePortConsignmentId from dual
+    </selectKey>
+
+    insert into   CHANGE_PORT_CONSIGNMENT (CHANGE_PORT_CONSIGNMENT_ID, CHANGE_PORT_ID,
+      CONSIGNMENT_ID)
+    values (#{changePortConsignmentId,jdbcType=DECIMAL}, #{changePortId,jdbcType=VARCHAR}, 
+      #{consignmentId,jdbcType=DECIMAL})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.ChangePortConsignment">
+    insert into   CHANGE_PORT_CONSIGNMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="changePortConsignmentId != null">
+        CHANGE_PORT_CONSIGNMENT_ID,
+      </if>
+      <if test="changePortId != null">
+        CHANGE_PORT_ID,
+      </if>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="changePortConsignmentId != null">
+        #{changePortConsignmentId,jdbcType=DECIMAL},
+      </if>
+      <if test="changePortId != null">
+        #{changePortId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentId != null">
+        #{consignmentId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.ChangePortConsignment">
+    update   CHANGE_PORT_CONSIGNMENT
+    <set>
+      <if test="changePortId != null">
+        CHANGE_PORT_ID = #{changePortId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where CHANGE_PORT_CONSIGNMENT_ID = #{changePortConsignmentId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.ChangePortConsignment">
+    update   CHANGE_PORT_CONSIGNMENT
+    set CHANGE_PORT_ID = #{changePortId,jdbcType=VARCHAR},
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL}
+    where CHANGE_PORT_CONSIGNMENT_ID = #{changePortConsignmentId,jdbcType=DECIMAL}
+  </update>
+</mapper>

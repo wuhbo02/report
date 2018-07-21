@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.TransferCheckRelationMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.TransferCheckRelation">
+    <id column="TRANSFER_CHECK_RELATION_ID" jdbcType="DECIMAL" property="transferCheckRelationId" />
+    <result column="TRANSFER_CHECK_ID" jdbcType="VARCHAR" property="transferCheckId" />
+    <result column="IMPORT_REPORT_ID" jdbcType="VARCHAR" property="importReportId" />
+    <result column="EXPORT_REPORT_ID" jdbcType="VARCHAR" property="exportReportId" />
+    <result column="ADDITIONALINFORMATION" jdbcType="VARCHAR" property="additionalinformation" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TRANSFER_CHECK_RELATION_ID, TRANSFER_CHECK_ID, IMPORT_REPORT_ID, EXPORT_REPORT_ID, 
+    ADDITIONALINFORMATION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   TRANSFER_CHECK_RELATION
+    where TRANSFER_CHECK_RELATION_ID = #{transferCheckRelationId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from   TRANSFER_CHECK_RELATION
+    where TRANSFER_CHECK_RELATION_ID = #{transferCheckRelationId,jdbcType=DECIMAL}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.gdin.report.entity.TransferCheckRelation">
+    <selectKey keyProperty="transferCheckRelationId" order="BEFORE" resultType="DECIMAL">
+      SELECT TRANSFER_CHECK_RELATION_SEQ.nextval transferCheckRelationId from dual
+    </selectKey>
+
+    insert into   TRANSFER_CHECK_RELATION (TRANSFER_CHECK_RELATION_ID, TRANSFER_CHECK_ID,
+      IMPORT_REPORT_ID, EXPORT_REPORT_ID, ADDITIONALINFORMATION
+      )
+    values (#{transferCheckRelationId,jdbcType=DECIMAL}, #{transferCheckId,jdbcType=VARCHAR}, 
+      #{importReportId,jdbcType=VARCHAR}, #{exportReportId,jdbcType=VARCHAR}, #{additionalinformation,jdbcType=VARCHAR}
+      )
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.TransferCheckRelation">
+    insert into   TRANSFER_CHECK_RELATION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="transferCheckRelationId != null">
+        TRANSFER_CHECK_RELATION_ID,
+      </if>
+      <if test="transferCheckId != null">
+        TRANSFER_CHECK_ID,
+      </if>
+      <if test="importReportId != null">
+        IMPORT_REPORT_ID,
+      </if>
+      <if test="exportReportId != null">
+        EXPORT_REPORT_ID,
+      </if>
+      <if test="additionalinformation != null">
+        ADDITIONALINFORMATION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="transferCheckRelationId != null">
+        #{transferCheckRelationId,jdbcType=DECIMAL},
+      </if>
+      <if test="transferCheckId != null">
+        #{transferCheckId,jdbcType=VARCHAR},
+      </if>
+      <if test="importReportId != null">
+        #{importReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="exportReportId != null">
+        #{exportReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalinformation != null">
+        #{additionalinformation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.TransferCheckRelation">
+    update   TRANSFER_CHECK_RELATION
+    <set>
+      <if test="transferCheckId != null">
+        TRANSFER_CHECK_ID = #{transferCheckId,jdbcType=VARCHAR},
+      </if>
+      <if test="importReportId != null">
+        IMPORT_REPORT_ID = #{importReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="exportReportId != null">
+        EXPORT_REPORT_ID = #{exportReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalinformation != null">
+        ADDITIONALINFORMATION = #{additionalinformation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TRANSFER_CHECK_RELATION_ID = #{transferCheckRelationId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.TransferCheckRelation">
+    update   TRANSFER_CHECK_RELATION
+    set TRANSFER_CHECK_ID = #{transferCheckId,jdbcType=VARCHAR},
+      IMPORT_REPORT_ID = #{importReportId,jdbcType=VARCHAR},
+      EXPORT_REPORT_ID = #{exportReportId,jdbcType=VARCHAR},
+      ADDITIONALINFORMATION = #{additionalinformation,jdbcType=VARCHAR}
+    where TRANSFER_CHECK_RELATION_ID = #{transferCheckRelationId,jdbcType=DECIMAL}
+  </update>
+</mapper>

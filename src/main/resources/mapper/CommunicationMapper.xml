@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.CommunicationMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.Communication">
+    <id column="COMMUNICATION_ID" jdbcType="VARCHAR" property="communicationId" />
+    <result column="TYPEID" jdbcType="VARCHAR" property="typeid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    COMMUNICATION_ID, TYPEID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   COMMUNICATION
+    where COMMUNICATION_ID = #{communicationId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from   COMMUNICATION
+    where COMMUNICATION_ID = #{communicationId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gdin.report.entity.Communication">
+    insert into   COMMUNICATION (COMMUNICATION_ID, TYPEID)
+    values (#{communicationId,jdbcType=VARCHAR}, #{typeid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.Communication">
+    insert into   COMMUNICATION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="communicationId != null">
+        COMMUNICATION_ID,
+      </if>
+      <if test="typeid != null">
+        TYPEID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="communicationId != null">
+        #{communicationId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null">
+        #{typeid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.Communication">
+    update   COMMUNICATION
+    <set>
+      <if test="typeid != null">
+        TYPEID = #{typeid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where COMMUNICATION_ID = #{communicationId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.Communication">
+    update   COMMUNICATION
+    set TYPEID = #{typeid,jdbcType=VARCHAR}
+    where COMMUNICATION_ID = #{communicationId,jdbcType=VARCHAR}
+  </update>
+</mapper>

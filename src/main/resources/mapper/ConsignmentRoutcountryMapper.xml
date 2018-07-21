@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.ConsignmentRoutcountryMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.ConsignmentRoutcountry">
+    <id column="CONSIGNMENT_ROUTCOUNTRY_ID" jdbcType="DECIMAL" property="consignmentRoutcountryId" />
+    <result column="CONSIGNMENT_ID" jdbcType="DECIMAL" property="consignmentId" />
+    <result column="ROUTCOUNTRYCODE" jdbcType="VARCHAR" property="routcountrycode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CONSIGNMENT_ROUTCOUNTRY_ID, CONSIGNMENT_ID, ROUTCOUNTRYCODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CONSIGNMENT_ROUTCOUNTRY
+    where CONSIGNMENT_ROUTCOUNTRY_ID = #{consignmentRoutcountryId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from CONSIGNMENT_ROUTCOUNTRY
+    where CONSIGNMENT_ROUTCOUNTRY_ID = #{consignmentRoutcountryId,jdbcType=DECIMAL}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.gdin.report.entity.ConsignmentRoutcountry">
+
+    <selectKey keyProperty="consignmentRoutcountryId" order="BEFORE" resultType="DECIMAL">
+      SELECT CONSIGNMENT_ROUTCOUNTRY_SEQ.nextval consignmentRoutcountryId from dual
+    </selectKey>
+
+    insert into CONSIGNMENT_ROUTCOUNTRY (CONSIGNMENT_ROUTCOUNTRY_ID, CONSIGNMENT_ID, 
+      ROUTCOUNTRYCODE)
+    values (#{consignmentRoutcountryId,jdbcType=DECIMAL}, #{consignmentId,jdbcType=DECIMAL}, 
+      #{routcountrycode,jdbcType=VARCHAR})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.ConsignmentRoutcountry">
+    insert into CONSIGNMENT_ROUTCOUNTRY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="consignmentRoutcountryId != null">
+        CONSIGNMENT_ROUTCOUNTRY_ID,
+      </if>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID,
+      </if>
+      <if test="routcountrycode != null">
+        ROUTCOUNTRYCODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="consignmentRoutcountryId != null">
+        #{consignmentRoutcountryId,jdbcType=DECIMAL},
+      </if>
+      <if test="consignmentId != null">
+        #{consignmentId,jdbcType=DECIMAL},
+      </if>
+      <if test="routcountrycode != null">
+        #{routcountrycode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.ConsignmentRoutcountry">
+    update CONSIGNMENT_ROUTCOUNTRY
+    <set>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL},
+      </if>
+      <if test="routcountrycode != null">
+        ROUTCOUNTRYCODE = #{routcountrycode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CONSIGNMENT_ROUTCOUNTRY_ID = #{consignmentRoutcountryId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.ConsignmentRoutcountry">
+    update CONSIGNMENT_ROUTCOUNTRY
+    set CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL},
+      ROUTCOUNTRYCODE = #{routcountrycode,jdbcType=VARCHAR}
+    where CONSIGNMENT_ROUTCOUNTRY_ID = #{consignmentRoutcountryId,jdbcType=DECIMAL}
+  </update>
+</mapper>

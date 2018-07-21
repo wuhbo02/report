@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.TransferCheckEquipmentMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.TransferCheckEquipment">
+    <id column="TRANSFER_CHECK_EQUIPMENT_ID" jdbcType="DECIMAL" property="transferCheckEquipmentId" />
+    <result column="TRANSFER_CHECK_RELATION_ID" jdbcType="DECIMAL" property="transferCheckRelationId" />
+    <result column="IMPORTTRANSPORTEQUIPMENTID" jdbcType="VARCHAR" property="importtransportequipmentid" />
+    <result column="EXPORTTRANSPORTEQUIPMENTID" jdbcType="VARCHAR" property="exporttransportequipmentid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TRANSFER_CHECK_EQUIPMENT_ID, TRANSFER_CHECK_RELATION_ID, IMPORTTRANSPORTEQUIPMENTID, 
+    EXPORTTRANSPORTEQUIPMENTID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   TRANSFER_CHECK_EQUIPMENT
+    where TRANSFER_CHECK_EQUIPMENT_ID = #{transferCheckEquipmentId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from   TRANSFER_CHECK_EQUIPMENT
+    where TRANSFER_CHECK_EQUIPMENT_ID = #{transferCheckEquipmentId,jdbcType=DECIMAL}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.gdin.report.entity.TransferCheckEquipment">
+    <selectKey keyProperty="transferCheckEquipmentId" order="BEFORE" resultType="DECIMAL">
+      SELECT TRANSFER_CHECK_EQUIPMENT_SEQ.nextval transferCheckEquipmentId from dual
+    </selectKey>
+
+    insert into   TRANSFER_CHECK_EQUIPMENT (TRANSFER_CHECK_EQUIPMENT_ID, TRANSFER_CHECK_RELATION_ID,
+      IMPORTTRANSPORTEQUIPMENTID, EXPORTTRANSPORTEQUIPMENTID
+      )
+    values (#{transferCheckEquipmentId,jdbcType=DECIMAL}, #{transferCheckRelationId,jdbcType=DECIMAL}, 
+      #{importtransportequipmentid,jdbcType=VARCHAR}, #{exporttransportequipmentid,jdbcType=VARCHAR}
+      )
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.TransferCheckEquipment">
+    insert into   TRANSFER_CHECK_EQUIPMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="transferCheckEquipmentId != null">
+        TRANSFER_CHECK_EQUIPMENT_ID,
+      </if>
+      <if test="transferCheckRelationId != null">
+        TRANSFER_CHECK_RELATION_ID,
+      </if>
+      <if test="importtransportequipmentid != null">
+        IMPORTTRANSPORTEQUIPMENTID,
+      </if>
+      <if test="exporttransportequipmentid != null">
+        EXPORTTRANSPORTEQUIPMENTID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="transferCheckEquipmentId != null">
+        #{transferCheckEquipmentId,jdbcType=DECIMAL},
+      </if>
+      <if test="transferCheckRelationId != null">
+        #{transferCheckRelationId,jdbcType=DECIMAL},
+      </if>
+      <if test="importtransportequipmentid != null">
+        #{importtransportequipmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="exporttransportequipmentid != null">
+        #{exporttransportequipmentid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.TransferCheckEquipment">
+    update   TRANSFER_CHECK_EQUIPMENT
+    <set>
+      <if test="transferCheckRelationId != null">
+        TRANSFER_CHECK_RELATION_ID = #{transferCheckRelationId,jdbcType=DECIMAL},
+      </if>
+      <if test="importtransportequipmentid != null">
+        IMPORTTRANSPORTEQUIPMENTID = #{importtransportequipmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="exporttransportequipmentid != null">
+        EXPORTTRANSPORTEQUIPMENTID = #{exporttransportequipmentid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TRANSFER_CHECK_EQUIPMENT_ID = #{transferCheckEquipmentId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.TransferCheckEquipment">
+    update   TRANSFER_CHECK_EQUIPMENT
+    set TRANSFER_CHECK_RELATION_ID = #{transferCheckRelationId,jdbcType=DECIMAL},
+      IMPORTTRANSPORTEQUIPMENTID = #{importtransportequipmentid,jdbcType=VARCHAR},
+      EXPORTTRANSPORTEQUIPMENTID = #{exporttransportequipmentid,jdbcType=VARCHAR}
+    where TRANSFER_CHECK_EQUIPMENT_ID = #{transferCheckEquipmentId,jdbcType=DECIMAL}
+  </update>
+</mapper>

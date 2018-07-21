@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.ExportConsignmentMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.ExportConsignment">
+    <id column="EXPORT_CONSIGNMENT_ID" jdbcType="DECIMAL" property="exportConsignmentId" />
+    <result column="EXPORT_REPORT_ID" jdbcType="VARCHAR" property="exportReportId" />
+    <result column="CONSIGNMENT_ID" jdbcType="DECIMAL" property="consignmentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    EXPORT_CONSIGNMENT_ID, EXPORT_REPORT_ID, CONSIGNMENT_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   EXPORT_CONSIGNMENT
+    where EXPORT_CONSIGNMENT_ID = #{exportConsignmentId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from   EXPORT_CONSIGNMENT
+    where EXPORT_CONSIGNMENT_ID = #{exportConsignmentId,jdbcType=DECIMAL}
+  </delete>
+
+  <insert id="insert" parameterType="com.gdin.report.entity.ExportConsignment">
+    <selectKey keyProperty="exportConsignmentId" order="BEFORE" resultType="DECIMAL">
+      SELECT EXPORT_CONSIGNMENT_SEQ.nextval exportConsignmentId from dual
+    </selectKey>
+
+    insert into   EXPORT_CONSIGNMENT (EXPORT_CONSIGNMENT_ID, EXPORT_REPORT_ID,
+      CONSIGNMENT_ID)
+    values (#{exportConsignmentId,jdbcType=DECIMAL}, #{exportReportId,jdbcType=VARCHAR}, 
+      #{consignmentId,jdbcType=DECIMAL})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.ExportConsignment">
+    insert into   EXPORT_CONSIGNMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="exportConsignmentId != null">
+        EXPORT_CONSIGNMENT_ID,
+      </if>
+      <if test="exportReportId != null">
+        EXPORT_REPORT_ID,
+      </if>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="exportConsignmentId != null">
+        #{exportConsignmentId,jdbcType=DECIMAL},
+      </if>
+      <if test="exportReportId != null">
+        #{exportReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentId != null">
+        #{consignmentId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.ExportConsignment">
+    update   EXPORT_CONSIGNMENT
+    <set>
+      <if test="exportReportId != null">
+        EXPORT_REPORT_ID = #{exportReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where EXPORT_CONSIGNMENT_ID = #{exportConsignmentId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.ExportConsignment">
+    update   EXPORT_CONSIGNMENT
+    set EXPORT_REPORT_ID = #{exportReportId,jdbcType=VARCHAR},
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL}
+    where EXPORT_CONSIGNMENT_ID = #{exportConsignmentId,jdbcType=DECIMAL}
+  </update>
+</mapper>

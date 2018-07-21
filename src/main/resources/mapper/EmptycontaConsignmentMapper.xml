@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.EmptycontaConsignmentMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.EmptycontaConsignment">
+    <id column="EMPTYCONTA_CONSIGNMENT_ID" jdbcType="DECIMAL" property="emptycontaConsignmentId" />
+    <result column="EMPTYCONTA_ID" jdbcType="VARCHAR" property="emptycontaId" />
+    <result column="CONSIGNMENT_ID" jdbcType="DECIMAL" property="consignmentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    EMPTYCONTA_CONSIGNMENT_ID, EMPTYCONTA_ID, CONSIGNMENT_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   EMPTYCONTA_CONSIGNMENT
+    where EMPTYCONTA_CONSIGNMENT_ID = #{emptycontaConsignmentId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from   EMPTYCONTA_CONSIGNMENT
+    where EMPTYCONTA_CONSIGNMENT_ID = #{emptycontaConsignmentId,jdbcType=DECIMAL}
+  </delete>
+
+  <insert id="insert" parameterType="com.gdin.report.entity.EmptycontaConsignment">
+    <selectKey keyProperty="emptycontaConsignmentId" order="BEFORE" resultType="DECIMAL">
+      SELECT EMPTYCONTA_CONSIGNMENT_SEQ.nextval emptycontaConsignmentId from dual
+    </selectKey>
+
+    insert into   EMPTYCONTA_CONSIGNMENT (EMPTYCONTA_CONSIGNMENT_ID, EMPTYCONTA_ID,
+      CONSIGNMENT_ID)
+    values (#{emptycontaConsignmentId,jdbcType=DECIMAL}, #{emptycontaId,jdbcType=VARCHAR}, 
+      #{consignmentId,jdbcType=DECIMAL})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.EmptycontaConsignment">
+    insert into   EMPTYCONTA_CONSIGNMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="emptycontaConsignmentId != null">
+        EMPTYCONTA_CONSIGNMENT_ID,
+      </if>
+      <if test="emptycontaId != null">
+        EMPTYCONTA_ID,
+      </if>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="emptycontaConsignmentId != null">
+        #{emptycontaConsignmentId,jdbcType=DECIMAL},
+      </if>
+      <if test="emptycontaId != null">
+        #{emptycontaId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentId != null">
+        #{consignmentId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.EmptycontaConsignment">
+    update   EMPTYCONTA_CONSIGNMENT
+    <set>
+      <if test="emptycontaId != null">
+        EMPTYCONTA_ID = #{emptycontaId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where EMPTYCONTA_CONSIGNMENT_ID = #{emptycontaConsignmentId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.EmptycontaConsignment">
+    update   EMPTYCONTA_CONSIGNMENT
+    set EMPTYCONTA_ID = #{emptycontaId,jdbcType=VARCHAR},
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL}
+    where EMPTYCONTA_CONSIGNMENT_ID = #{emptycontaConsignmentId,jdbcType=DECIMAL}
+  </update>
+</mapper>

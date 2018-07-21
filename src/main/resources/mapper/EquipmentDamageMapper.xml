@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.EquipmentDamageMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.EquipmentDamage">
+    <id column="EQUIPMENT_DAMAGE_ID" jdbcType="DECIMAL" property="equipmentDamageId" />
+    <result column="DAMAGETYPECODE" jdbcType="VARCHAR" property="damagetypecode" />
+    <result column="DAMAGETYPETEXT" jdbcType="VARCHAR" property="damagetypetext" />
+    <result column="DAMAGEAREACODE" jdbcType="VARCHAR" property="damageareacode" />
+    <result column="DAMAGEAREATEXT" jdbcType="VARCHAR" property="damageareatext" />
+    <result column="DAMAGESEVERITY" jdbcType="VARCHAR" property="damageseverity" />
+    <result column="TRANSPORTEQUIPMENT_ID" jdbcType="VARCHAR" property="transportequipmentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    EQUIPMENT_DAMAGE_ID, DAMAGETYPECODE, DAMAGETYPETEXT, DAMAGEAREACODE, DAMAGEAREATEXT, 
+    DAMAGESEVERITY, TRANSPORTEQUIPMENT_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from EQUIPMENT_DAMAGE
+    where EQUIPMENT_DAMAGE_ID = #{equipmentDamageId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from EQUIPMENT_DAMAGE
+    where EQUIPMENT_DAMAGE_ID = #{equipmentDamageId,jdbcType=DECIMAL}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.gdin.report.entity.EquipmentDamage">
+    <selectKey keyProperty="equipmentDamageId" order="BEFORE" resultType="DECIMAL">
+      SELECT EQUIPMENT_DAMAGE_SEQ.nextval equipmentDamageId from dual
+    </selectKey>
+
+    insert into EQUIPMENT_DAMAGE (EQUIPMENT_DAMAGE_ID, DAMAGETYPECODE, 
+      DAMAGETYPETEXT, DAMAGEAREACODE, DAMAGEAREATEXT, 
+      DAMAGESEVERITY, TRANSPORTEQUIPMENT_ID)
+    values (#{equipmentDamageId,jdbcType=DECIMAL}, #{damagetypecode,jdbcType=VARCHAR}, 
+      #{damagetypetext,jdbcType=VARCHAR}, #{damageareacode,jdbcType=VARCHAR}, #{damageareatext,jdbcType=VARCHAR}, 
+      #{damageseverity,jdbcType=VARCHAR}, #{transportequipmentId,jdbcType=VARCHAR})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.EquipmentDamage">
+    insert into EQUIPMENT_DAMAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="equipmentDamageId != null">
+        EQUIPMENT_DAMAGE_ID,
+      </if>
+      <if test="damagetypecode != null">
+        DAMAGETYPECODE,
+      </if>
+      <if test="damagetypetext != null">
+        DAMAGETYPETEXT,
+      </if>
+      <if test="damageareacode != null">
+        DAMAGEAREACODE,
+      </if>
+      <if test="damageareatext != null">
+        DAMAGEAREATEXT,
+      </if>
+      <if test="damageseverity != null">
+        DAMAGESEVERITY,
+      </if>
+      <if test="transportequipmentId != null">
+        TRANSPORTEQUIPMENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="equipmentDamageId != null">
+        #{equipmentDamageId,jdbcType=DECIMAL},
+      </if>
+      <if test="damagetypecode != null">
+        #{damagetypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="damagetypetext != null">
+        #{damagetypetext,jdbcType=VARCHAR},
+      </if>
+      <if test="damageareacode != null">
+        #{damageareacode,jdbcType=VARCHAR},
+      </if>
+      <if test="damageareatext != null">
+        #{damageareatext,jdbcType=VARCHAR},
+      </if>
+      <if test="damageseverity != null">
+        #{damageseverity,jdbcType=VARCHAR},
+      </if>
+      <if test="transportequipmentId != null">
+        #{transportequipmentId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.EquipmentDamage">
+    update EQUIPMENT_DAMAGE
+    <set>
+      <if test="damagetypecode != null">
+        DAMAGETYPECODE = #{damagetypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="damagetypetext != null">
+        DAMAGETYPETEXT = #{damagetypetext,jdbcType=VARCHAR},
+      </if>
+      <if test="damageareacode != null">
+        DAMAGEAREACODE = #{damageareacode,jdbcType=VARCHAR},
+      </if>
+      <if test="damageareatext != null">
+        DAMAGEAREATEXT = #{damageareatext,jdbcType=VARCHAR},
+      </if>
+      <if test="damageseverity != null">
+        DAMAGESEVERITY = #{damageseverity,jdbcType=VARCHAR},
+      </if>
+      <if test="transportequipmentId != null">
+        TRANSPORTEQUIPMENT_ID = #{transportequipmentId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where EQUIPMENT_DAMAGE_ID = #{equipmentDamageId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.EquipmentDamage">
+    update EQUIPMENT_DAMAGE
+    set DAMAGETYPECODE = #{damagetypecode,jdbcType=VARCHAR},
+      DAMAGETYPETEXT = #{damagetypetext,jdbcType=VARCHAR},
+      DAMAGEAREACODE = #{damageareacode,jdbcType=VARCHAR},
+      DAMAGEAREATEXT = #{damageareatext,jdbcType=VARCHAR},
+      DAMAGESEVERITY = #{damageseverity,jdbcType=VARCHAR},
+      TRANSPORTEQUIPMENT_ID = #{transportequipmentId,jdbcType=VARCHAR}
+    where EQUIPMENT_DAMAGE_ID = #{equipmentDamageId,jdbcType=DECIMAL}
+  </update>
+</mapper>

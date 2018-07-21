@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.BordertransportmeansMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.Bordertransportmeans">
+    <id column="BORDERTRANSPORTMEANS_ID" jdbcType="DECIMAL" property="bordertransportmeansId" />
+    <result column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="JOURNEYID" jdbcType="VARCHAR" property="journeyid" />
+    <result column="TYPECODE" jdbcType="VARCHAR" property="typecode" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="FIRSTARRIVALLOCATIONID" jdbcType="VARCHAR" property="firstarrivallocationid" />
+    <result column="ARRIVALDATETIME" jdbcType="VARCHAR" property="arrivaldatetime" />
+    <result column="DEPARTUREDATETIME" jdbcType="VARCHAR" property="departuredatetime" />
+    <result column="ACTUALDATETIME" jdbcType="VARCHAR" property="actualdatetime" />
+    <result column="COMPLETEDDATETIME" jdbcType="VARCHAR" property="completeddatetime" />
+    <result column="LOADINGLOCATIONID" jdbcType="VARCHAR" property="loadinglocationid" />
+    <result column="UNLOADINGLOCATIONID" jdbcType="VARCHAR" property="unloadinglocationid" />
+    <result column="MASTER" jdbcType="VARCHAR" property="master" />
+    <result column="CARGOFACILITYLOCATION" jdbcType="VARCHAR" property="cargofacilitylocation" />
+    <result column="DESPATCHDATETIME" jdbcType="VARCHAR" property="despatchdatetime" />
+    <result column="UNLOADINGDATETIME" jdbcType="VARCHAR" property="unloadingdatetime" />
+    <result column="FREETEXT" jdbcType="VARCHAR" property="freetext" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    BORDERTRANSPORTMEANS_ID, ID, JOURNEYID, TYPECODE, NAME, FIRSTARRIVALLOCATIONID, ARRIVALDATETIME, 
+    DEPARTUREDATETIME, ACTUALDATETIME, COMPLETEDDATETIME, LOADINGLOCATIONID, UNLOADINGLOCATIONID, 
+    MASTER, CARGOFACILITYLOCATION, DESPATCHDATETIME, UNLOADINGDATETIME, FREETEXT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   BORDERTRANSPORTMEANS
+    where BORDERTRANSPORTMEANS_ID = #{bordertransportmeansId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from   BORDERTRANSPORTMEANS
+    where BORDERTRANSPORTMEANS_ID = #{bordertransportmeansId,jdbcType=DECIMAL}
+  </delete>
+
+  <insert id="insert" parameterType="com.gdin.report.entity.Bordertransportmeans">
+
+
+    <selectKey keyProperty="bordertransportmeansId" order="BEFORE" resultType="DECIMAL">
+      SELECT BORDERTRANSPORTMEANS_SEQ.nextval bordertransportmeansId from dual
+    </selectKey>
+
+    insert into   BORDERTRANSPORTMEANS (BORDERTRANSPORTMEANS_ID, ID, JOURNEYID,
+      TYPECODE, NAME, FIRSTARRIVALLOCATIONID, 
+      ARRIVALDATETIME, DEPARTUREDATETIME, ACTUALDATETIME, 
+      COMPLETEDDATETIME, LOADINGLOCATIONID, UNLOADINGLOCATIONID, 
+      MASTER, CARGOFACILITYLOCATION, DESPATCHDATETIME, 
+      UNLOADINGDATETIME, FREETEXT)
+    values (#{bordertransportmeansId,jdbcType=DECIMAL}, #{id,jdbcType=VARCHAR}, #{journeyid,jdbcType=VARCHAR}, 
+      #{typecode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{firstarrivallocationid,jdbcType=VARCHAR}, 
+      #{arrivaldatetime,jdbcType=VARCHAR}, #{departuredatetime,jdbcType=VARCHAR}, #{actualdatetime,jdbcType=VARCHAR}, 
+      #{completeddatetime,jdbcType=VARCHAR}, #{loadinglocationid,jdbcType=VARCHAR}, #{unloadinglocationid,jdbcType=VARCHAR}, 
+      #{master,jdbcType=VARCHAR}, #{cargofacilitylocation,jdbcType=VARCHAR}, #{despatchdatetime,jdbcType=VARCHAR}, 
+      #{unloadingdatetime,jdbcType=VARCHAR}, #{freetext,jdbcType=VARCHAR})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.Bordertransportmeans">
+    insert into   BORDERTRANSPORTMEANS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bordertransportmeansId != null">
+        BORDERTRANSPORTMEANS_ID,
+      </if>
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="journeyid != null">
+        JOURNEYID,
+      </if>
+      <if test="typecode != null">
+        TYPECODE,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="firstarrivallocationid != null">
+        FIRSTARRIVALLOCATIONID,
+      </if>
+      <if test="arrivaldatetime != null">
+        ARRIVALDATETIME,
+      </if>
+      <if test="departuredatetime != null">
+        DEPARTUREDATETIME,
+      </if>
+      <if test="actualdatetime != null">
+        ACTUALDATETIME,
+      </if>
+      <if test="completeddatetime != null">
+        COMPLETEDDATETIME,
+      </if>
+      <if test="loadinglocationid != null">
+        LOADINGLOCATIONID,
+      </if>
+      <if test="unloadinglocationid != null">
+        UNLOADINGLOCATIONID,
+      </if>
+      <if test="master != null">
+        MASTER,
+      </if>
+      <if test="cargofacilitylocation != null">
+        CARGOFACILITYLOCATION,
+      </if>
+      <if test="despatchdatetime != null">
+        DESPATCHDATETIME,
+      </if>
+      <if test="unloadingdatetime != null">
+        UNLOADINGDATETIME,
+      </if>
+      <if test="freetext != null">
+        FREETEXT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bordertransportmeansId != null">
+        #{bordertransportmeansId,jdbcType=DECIMAL},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="journeyid != null">
+        #{journeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="typecode != null">
+        #{typecode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="firstarrivallocationid != null">
+        #{firstarrivallocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivaldatetime != null">
+        #{arrivaldatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="departuredatetime != null">
+        #{departuredatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="actualdatetime != null">
+        #{actualdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="completeddatetime != null">
+        #{completeddatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="loadinglocationid != null">
+        #{loadinglocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="unloadinglocationid != null">
+        #{unloadinglocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="master != null">
+        #{master,jdbcType=VARCHAR},
+      </if>
+      <if test="cargofacilitylocation != null">
+        #{cargofacilitylocation,jdbcType=VARCHAR},
+      </if>
+      <if test="despatchdatetime != null">
+        #{despatchdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="unloadingdatetime != null">
+        #{unloadingdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="freetext != null">
+        #{freetext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.Bordertransportmeans">
+    update   BORDERTRANSPORTMEANS
+    <set>
+      <if test="id != null">
+        ID = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="journeyid != null">
+        JOURNEYID = #{journeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="typecode != null">
+        TYPECODE = #{typecode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="firstarrivallocationid != null">
+        FIRSTARRIVALLOCATIONID = #{firstarrivallocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivaldatetime != null">
+        ARRIVALDATETIME = #{arrivaldatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="departuredatetime != null">
+        DEPARTUREDATETIME = #{departuredatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="actualdatetime != null">
+        ACTUALDATETIME = #{actualdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="completeddatetime != null">
+        COMPLETEDDATETIME = #{completeddatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="loadinglocationid != null">
+        LOADINGLOCATIONID = #{loadinglocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="unloadinglocationid != null">
+        UNLOADINGLOCATIONID = #{unloadinglocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="master != null">
+        MASTER = #{master,jdbcType=VARCHAR},
+      </if>
+      <if test="cargofacilitylocation != null">
+        CARGOFACILITYLOCATION = #{cargofacilitylocation,jdbcType=VARCHAR},
+      </if>
+      <if test="despatchdatetime != null">
+        DESPATCHDATETIME = #{despatchdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="unloadingdatetime != null">
+        UNLOADINGDATETIME = #{unloadingdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="freetext != null">
+        FREETEXT = #{freetext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BORDERTRANSPORTMEANS_ID = #{bordertransportmeansId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.Bordertransportmeans">
+    update   BORDERTRANSPORTMEANS
+    set ID = #{id,jdbcType=VARCHAR},
+      JOURNEYID = #{journeyid,jdbcType=VARCHAR},
+      TYPECODE = #{typecode,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      FIRSTARRIVALLOCATIONID = #{firstarrivallocationid,jdbcType=VARCHAR},
+      ARRIVALDATETIME = #{arrivaldatetime,jdbcType=VARCHAR},
+      DEPARTUREDATETIME = #{departuredatetime,jdbcType=VARCHAR},
+      ACTUALDATETIME = #{actualdatetime,jdbcType=VARCHAR},
+      COMPLETEDDATETIME = #{completeddatetime,jdbcType=VARCHAR},
+      LOADINGLOCATIONID = #{loadinglocationid,jdbcType=VARCHAR},
+      UNLOADINGLOCATIONID = #{unloadinglocationid,jdbcType=VARCHAR},
+      MASTER = #{master,jdbcType=VARCHAR},
+      CARGOFACILITYLOCATION = #{cargofacilitylocation,jdbcType=VARCHAR},
+      DESPATCHDATETIME = #{despatchdatetime,jdbcType=VARCHAR},
+      UNLOADINGDATETIME = #{unloadingdatetime,jdbcType=VARCHAR},
+      FREETEXT = #{freetext,jdbcType=VARCHAR}
+    where BORDERTRANSPORTMEANS_ID = #{bordertransportmeansId,jdbcType=DECIMAL}
+  </update>
+</mapper>

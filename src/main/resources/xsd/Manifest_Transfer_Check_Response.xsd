@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 (http://www.altova.com) by lei_ying (szc) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!--******中国海关国际转运准单回执报文定义文档******-->
+	<!--本文档仅用于定义中国海关国际转运准单回执报文结构，不作为回执报文效验。-->
+	<!--******根元素定义******-->
+	<!--国际转运准单回执报文以Manifest作为根节点-->
+	<xs:element name="Manifest" type="Manifest">
+		<xs:annotation>
+			<xs:documentation>国际转运准单回执报文</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--******根元素结构定义******-->
+	<xs:complexType name="Manifest">
+		<xs:annotation>
+			<xs:documentation>回执报文</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Head" type="Head">
+				<xs:annotation>
+					<xs:documentation>报文头（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Response" maxOccurs="9999">
+				<xs:annotation>
+					<xs:documentation>报文体（循环次数：1-9999）</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="Response"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--******报文头结构定义******-->
+	<!--MessageID/报文编号：与申报报文一致-->
+	<!--MessageType/报文类型代码：与申报报文一致-->
+	<!--FunctionCode/报文功能代码：与申报报文一致-->
+	<!--SenderID/发送方代码：使用申报报文ReceiverID/接受方代码-->
+	<!--ReceiverID/接受方代码：使用申报报文SenderID/发送方代码-->
+	<!--SendTime/发送时间：使用产生回执的系统时间-->
+	<!--Version/报文版本号：目前版本1.0-->
+	<xs:complexType name="Head">
+		<xs:annotation>
+			<xs:documentation>报文头</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MessageID">
+				<xs:annotation>
+					<xs:documentation>报文编号（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FunctionCode">
+				<xs:annotation>
+					<xs:documentation>报文功能代码（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MessageType">
+				<xs:annotation>
+					<xs:documentation>报文类型代码（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SenderID">
+				<xs:annotation>
+					<xs:documentation>发送方代码（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ReceiverID">
+				<xs:annotation>
+					<xs:documentation>接受方代码（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SendTime">
+				<xs:annotation>
+					<xs:documentation>发送时间（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Version">
+				<xs:annotation>
+					<xs:documentation>报文版本号（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--******报文体结构定义******-->
+	<xs:complexType name="Response">
+		<xs:annotation>
+			<xs:documentation>报文体</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ImportInformation" type="ImportInformation">
+				<xs:annotation>
+					<xs:documentation>原始舱单数据段（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExportInformation" type="ExportInformation">
+				<xs:annotation>
+					<xs:documentation>预配舱单数据段（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ResponseType" type="ResponseType">
+				<xs:annotation>
+					<xs:documentation>回执信息数据段（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--******茎元素结构定义******-->
+	<!--******原始舱单数据段******-->
+	<xs:complexType name="ImportInformation">
+		<xs:annotation>
+			<xs:documentation>原始舱单数据段</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BorderTransportMeans" type="BorderTransportMeans">
+				<xs:annotation>
+					<xs:documentation>原始舱单运输工具信息（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Consignment" type="Consignment">
+				<xs:annotation>
+					<xs:documentation>原始舱单提（运）单信息（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--******预配舱单数据段******-->
+	<xs:complexType name="ExportInformation">
+		<xs:annotation>
+			<xs:documentation>预配舱单数据段</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BorderTransportMeans" type="BorderTransportMeans">
+				<xs:annotation>
+					<xs:documentation>预配舱单运输工具信息（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Consignment" type="Consignment">
+				<xs:annotation>
+					<xs:documentation>预配舱单提（运）单信息（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--******运输工具数据段******-->
+	<!--空运不填写ID/运输工具代码-->
+	<xs:complexType name="BorderTransportMeans">
+		<xs:annotation>
+			<xs:documentation>运输工具数据段</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="JourneyID">
+				<xs:annotation>
+					<xs:documentation>149 Conveyance reference number 航次航班编号（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ID" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>167 Identification of means of transport crossing the border code 运输工具代码（循环次数：0-1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--******提（运）单数据段******-->
+	<!--AssociatedTransportDocument/运输合同附加信息：分提（运）单申报则循环次数为1-->
+	<xs:complexType name="Consignment">
+		<xs:annotation>
+			<xs:documentation>提（运）单数据段</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TransportContractDocument" type="TransportContractDocument">
+				<xs:annotation>
+					<xs:documentation>运输合同信息（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AssociatedTransportDocument" type="AssociatedTransportDocument" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>运输合同附加信息（循环次数：0-1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--运输合同信息-->
+	<xs:complexType name="TransportContractDocument">
+		<xs:annotation>
+			<xs:documentation>运输合同信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID">
+				<xs:annotation>
+					<xs:documentation>015 Transport document number 总提（运）单号（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--运输合同附加信息-->
+	<xs:complexType name="AssociatedTransportDocument">
+		<xs:annotation>
+			<xs:documentation>运输合同附加信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID">
+				<xs:annotation>
+					<xs:documentation>189 Associated transport document number 分提（运）单号（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--******回执信息数据段******-->
+	<xs:complexType name="ResponseType">
+		<xs:annotation>
+			<xs:documentation>回执信息数据段</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Code">
+				<xs:annotation>
+					<xs:documentation>回执类型代码（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Text">
+				<xs:annotation>
+					<xs:documentation>回执类型详细描述（循环次数：1）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

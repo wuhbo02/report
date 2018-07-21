@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.ConsignmentitemMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.Consignmentitem">
+    <id column="CONSIGNMENTITEM_ID" jdbcType="DECIMAL" property="consignmentitemId" />
+    <result column="SEQUENCENUMERIC" jdbcType="VARCHAR" property="sequencenumeric" />
+    <result column="PACKAGE_QUANTITY" jdbcType="VARCHAR" property="packageQuantity" />
+    <result column="PACKAGE_TYPECODE" jdbcType="VARCHAR" property="packageTypecode" />
+    <result column="PACKAGE_MARKSNUMBERS" jdbcType="VARCHAR" property="packageMarksnumbers" />
+    <result column="CARGODESCRIPTION" jdbcType="VARCHAR" property="cargodescription" />
+    <result column="UNDGCODE" jdbcType="VARCHAR" property="undgcode" />
+    <result column="TARIFFCLASSIFICATIONCODE" jdbcType="VARCHAR" property="tariffclassificationcode" />
+    <result column="ADDITIONALINFORMATION" jdbcType="VARCHAR" property="additionalinformation" />
+    <result column="GOODSMEASURE" jdbcType="VARCHAR" property="goodsmeasure" />
+    <result column="CUSTOMSPROCEDURE" jdbcType="VARCHAR" property="customsprocedure" />
+    <result column="ORIGINCOUNTRYCODE" jdbcType="VARCHAR" property="origincountrycode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CONSIGNMENTITEM_ID, SEQUENCENUMERIC, PACKAGE_QUANTITY, PACKAGE_TYPECODE, PACKAGE_MARKSNUMBERS, 
+    CARGODESCRIPTION, UNDGCODE, TARIFFCLASSIFICATIONCODE, ADDITIONALINFORMATION, GOODSMEASURE, 
+    CUSTOMSPROCEDURE, ORIGINCOUNTRYCODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   CONSIGNMENTITEM
+    where CONSIGNMENTITEM_ID = #{consignmentitemId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from   CONSIGNMENTITEM
+    where CONSIGNMENTITEM_ID = #{consignmentitemId,jdbcType=DECIMAL}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.gdin.report.entity.Consignmentitem">
+    <selectKey keyProperty="consignmentitemId" order="BEFORE" resultType="DECIMAL">
+      SELECT CONSIGNMENTITEM_SEQ.nextval consignmentitemId from dual
+    </selectKey>
+
+    insert into   CONSIGNMENTITEM (CONSIGNMENTITEM_ID, SEQUENCENUMERIC,
+      PACKAGE_QUANTITY, PACKAGE_TYPECODE, PACKAGE_MARKSNUMBERS, 
+      CARGODESCRIPTION, UNDGCODE, TARIFFCLASSIFICATIONCODE, 
+      ADDITIONALINFORMATION, GOODSMEASURE, CUSTOMSPROCEDURE, 
+      ORIGINCOUNTRYCODE)
+    values (#{consignmentitemId,jdbcType=DECIMAL}, #{sequencenumeric,jdbcType=VARCHAR}, 
+      #{packageQuantity,jdbcType=VARCHAR}, #{packageTypecode,jdbcType=VARCHAR}, #{packageMarksnumbers,jdbcType=VARCHAR}, 
+      #{cargodescription,jdbcType=VARCHAR}, #{undgcode,jdbcType=VARCHAR}, #{tariffclassificationcode,jdbcType=VARCHAR}, 
+      #{additionalinformation,jdbcType=VARCHAR}, #{goodsmeasure,jdbcType=VARCHAR}, #{customsprocedure,jdbcType=VARCHAR}, 
+      #{origincountrycode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.Consignmentitem">
+    insert into   CONSIGNMENTITEM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="consignmentitemId != null">
+        CONSIGNMENTITEM_ID,
+      </if>
+      <if test="sequencenumeric != null">
+        SEQUENCENUMERIC,
+      </if>
+      <if test="packageQuantity != null">
+        PACKAGE_QUANTITY,
+      </if>
+      <if test="packageTypecode != null">
+        PACKAGE_TYPECODE,
+      </if>
+      <if test="packageMarksnumbers != null">
+        PACKAGE_MARKSNUMBERS,
+      </if>
+      <if test="cargodescription != null">
+        CARGODESCRIPTION,
+      </if>
+      <if test="undgcode != null">
+        UNDGCODE,
+      </if>
+      <if test="tariffclassificationcode != null">
+        TARIFFCLASSIFICATIONCODE,
+      </if>
+      <if test="additionalinformation != null">
+        ADDITIONALINFORMATION,
+      </if>
+      <if test="goodsmeasure != null">
+        GOODSMEASURE,
+      </if>
+      <if test="customsprocedure != null">
+        CUSTOMSPROCEDURE,
+      </if>
+      <if test="origincountrycode != null">
+        ORIGINCOUNTRYCODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="consignmentitemId != null">
+        #{consignmentitemId,jdbcType=DECIMAL},
+      </if>
+      <if test="sequencenumeric != null">
+        #{sequencenumeric,jdbcType=VARCHAR},
+      </if>
+      <if test="packageQuantity != null">
+        #{packageQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="packageTypecode != null">
+        #{packageTypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="packageMarksnumbers != null">
+        #{packageMarksnumbers,jdbcType=VARCHAR},
+      </if>
+      <if test="cargodescription != null">
+        #{cargodescription,jdbcType=VARCHAR},
+      </if>
+      <if test="undgcode != null">
+        #{undgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tariffclassificationcode != null">
+        #{tariffclassificationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalinformation != null">
+        #{additionalinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsmeasure != null">
+        #{goodsmeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="customsprocedure != null">
+        #{customsprocedure,jdbcType=VARCHAR},
+      </if>
+      <if test="origincountrycode != null">
+        #{origincountrycode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.Consignmentitem">
+    update   CONSIGNMENTITEM
+    <set>
+      <if test="sequencenumeric != null">
+        SEQUENCENUMERIC = #{sequencenumeric,jdbcType=VARCHAR},
+      </if>
+      <if test="packageQuantity != null">
+        PACKAGE_QUANTITY = #{packageQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="packageTypecode != null">
+        PACKAGE_TYPECODE = #{packageTypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="packageMarksnumbers != null">
+        PACKAGE_MARKSNUMBERS = #{packageMarksnumbers,jdbcType=VARCHAR},
+      </if>
+      <if test="cargodescription != null">
+        CARGODESCRIPTION = #{cargodescription,jdbcType=VARCHAR},
+      </if>
+      <if test="undgcode != null">
+        UNDGCODE = #{undgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tariffclassificationcode != null">
+        TARIFFCLASSIFICATIONCODE = #{tariffclassificationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalinformation != null">
+        ADDITIONALINFORMATION = #{additionalinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsmeasure != null">
+        GOODSMEASURE = #{goodsmeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="customsprocedure != null">
+        CUSTOMSPROCEDURE = #{customsprocedure,jdbcType=VARCHAR},
+      </if>
+      <if test="origincountrycode != null">
+        ORIGINCOUNTRYCODE = #{origincountrycode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CONSIGNMENTITEM_ID = #{consignmentitemId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.Consignmentitem">
+    update   CONSIGNMENTITEM
+    set SEQUENCENUMERIC = #{sequencenumeric,jdbcType=VARCHAR},
+      PACKAGE_QUANTITY = #{packageQuantity,jdbcType=VARCHAR},
+      PACKAGE_TYPECODE = #{packageTypecode,jdbcType=VARCHAR},
+      PACKAGE_MARKSNUMBERS = #{packageMarksnumbers,jdbcType=VARCHAR},
+      CARGODESCRIPTION = #{cargodescription,jdbcType=VARCHAR},
+      UNDGCODE = #{undgcode,jdbcType=VARCHAR},
+      TARIFFCLASSIFICATIONCODE = #{tariffclassificationcode,jdbcType=VARCHAR},
+      ADDITIONALINFORMATION = #{additionalinformation,jdbcType=VARCHAR},
+      GOODSMEASURE = #{goodsmeasure,jdbcType=VARCHAR},
+      CUSTOMSPROCEDURE = #{customsprocedure,jdbcType=VARCHAR},
+      ORIGINCOUNTRYCODE = #{origincountrycode,jdbcType=VARCHAR}
+    where CONSIGNMENTITEM_ID = #{consignmentitemId,jdbcType=DECIMAL}
+  </update>
+</mapper>

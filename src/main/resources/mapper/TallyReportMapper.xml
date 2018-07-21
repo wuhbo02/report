@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.TallyReportMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.TallyReport">
+    <id column="TALLY_REPORT_ID" jdbcType="VARCHAR" property="tallyReportId" />
+    <result column="DECLARATIONOFFICEID" jdbcType="VARCHAR" property="declarationofficeid" />
+    <result column="BORDERTRANSPORTMEANS_ID" jdbcType="DECIMAL" property="bordertransportmeansId" />
+    <result column="TALLYPARTYID" jdbcType="VARCHAR" property="tallypartyid" />
+    <result column="CONTACT_ID" jdbcType="VARCHAR" property="contactId" />
+    <result column="ADDITIONALINFORMATION" jdbcType="VARCHAR" property="additionalinformation" />
+    <result column="MESSAGEID" jdbcType="VARCHAR" property="messageid" />
+    <result column="MESSAGETYPE" jdbcType="VARCHAR" property="messagetype" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TALLY_REPORT_ID, DECLARATIONOFFICEID, BORDERTRANSPORTMEANS_ID, TALLYPARTYID, CONTACT_ID, 
+    ADDITIONALINFORMATION, MESSAGEID, MESSAGETYPE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   TALLY_REPORT
+    where TALLY_REPORT_ID = #{tallyReportId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from   TALLY_REPORT
+    where TALLY_REPORT_ID = #{tallyReportId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gdin.report.entity.TallyReport">
+    insert into   TALLY_REPORT (TALLY_REPORT_ID, DECLARATIONOFFICEID,
+      BORDERTRANSPORTMEANS_ID, TALLYPARTYID, CONTACT_ID, 
+      ADDITIONALINFORMATION, MESSAGEID, MESSAGETYPE
+      )
+    values (#{tallyReportId,jdbcType=VARCHAR}, #{declarationofficeid,jdbcType=VARCHAR}, 
+      #{bordertransportmeansId,jdbcType=DECIMAL}, #{tallypartyid,jdbcType=VARCHAR}, #{contactId,jdbcType=VARCHAR}, 
+      #{additionalinformation,jdbcType=VARCHAR}, #{messageid,jdbcType=VARCHAR}, #{messagetype,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.TallyReport">
+    insert into   TALLY_REPORT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tallyReportId != null">
+        TALLY_REPORT_ID,
+      </if>
+      <if test="declarationofficeid != null">
+        DECLARATIONOFFICEID,
+      </if>
+      <if test="bordertransportmeansId != null">
+        BORDERTRANSPORTMEANS_ID,
+      </if>
+      <if test="tallypartyid != null">
+        TALLYPARTYID,
+      </if>
+      <if test="contactId != null">
+        CONTACT_ID,
+      </if>
+      <if test="additionalinformation != null">
+        ADDITIONALINFORMATION,
+      </if>
+      <if test="messageid != null">
+        MESSAGEID,
+      </if>
+      <if test="messagetype != null">
+        MESSAGETYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tallyReportId != null">
+        #{tallyReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="declarationofficeid != null">
+        #{declarationofficeid,jdbcType=VARCHAR},
+      </if>
+      <if test="bordertransportmeansId != null">
+        #{bordertransportmeansId,jdbcType=DECIMAL},
+      </if>
+      <if test="tallypartyid != null">
+        #{tallypartyid,jdbcType=VARCHAR},
+      </if>
+      <if test="contactId != null">
+        #{contactId,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalinformation != null">
+        #{additionalinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="messageid != null">
+        #{messageid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetype != null">
+        #{messagetype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.TallyReport">
+    update   TALLY_REPORT
+    <set>
+      <if test="declarationofficeid != null">
+        DECLARATIONOFFICEID = #{declarationofficeid,jdbcType=VARCHAR},
+      </if>
+      <if test="bordertransportmeansId != null">
+        BORDERTRANSPORTMEANS_ID = #{bordertransportmeansId,jdbcType=DECIMAL},
+      </if>
+      <if test="tallypartyid != null">
+        TALLYPARTYID = #{tallypartyid,jdbcType=VARCHAR},
+      </if>
+      <if test="contactId != null">
+        CONTACT_ID = #{contactId,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalinformation != null">
+        ADDITIONALINFORMATION = #{additionalinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="messageid != null">
+        MESSAGEID = #{messageid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetype != null">
+        MESSAGETYPE = #{messagetype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TALLY_REPORT_ID = #{tallyReportId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.TallyReport">
+    update   TALLY_REPORT
+    set DECLARATIONOFFICEID = #{declarationofficeid,jdbcType=VARCHAR},
+      BORDERTRANSPORTMEANS_ID = #{bordertransportmeansId,jdbcType=DECIMAL},
+      TALLYPARTYID = #{tallypartyid,jdbcType=VARCHAR},
+      CONTACT_ID = #{contactId,jdbcType=VARCHAR},
+      ADDITIONALINFORMATION = #{additionalinformation,jdbcType=VARCHAR},
+      MESSAGEID = #{messageid,jdbcType=VARCHAR},
+      MESSAGETYPE = #{messagetype,jdbcType=VARCHAR}
+    where TALLY_REPORT_ID = #{tallyReportId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.LoadReportMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.LoadReport">
+    <id column="LOAD_REPORT_ID" jdbcType="VARCHAR" property="loadReportId" />
+    <result column="CARRIERID" jdbcType="VARCHAR" property="carrierid" />
+    <result column="BORDERTRANSPORTMEANS_ID" jdbcType="DECIMAL" property="bordertransportmeansId" />
+    <result column="ADDITIONALINFORMATION" jdbcType="VARCHAR" property="additionalinformation" />
+    <result column="MESSAGEID" jdbcType="VARCHAR" property="messageid" />
+    <result column="MESSAGETYPE" jdbcType="VARCHAR" property="messagetype" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    LOAD_REPORT_ID, CARRIERID, BORDERTRANSPORTMEANS_ID, ADDITIONALINFORMATION, MESSAGEID, 
+    MESSAGETYPE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   LOAD_REPORT
+    where LOAD_REPORT_ID = #{loadReportId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from   LOAD_REPORT
+    where LOAD_REPORT_ID = #{loadReportId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gdin.report.entity.LoadReport">
+    insert into   LOAD_REPORT (LOAD_REPORT_ID, CARRIERID, BORDERTRANSPORTMEANS_ID,
+      ADDITIONALINFORMATION, MESSAGEID, MESSAGETYPE
+      )
+    values (#{loadReportId,jdbcType=VARCHAR}, #{carrierid,jdbcType=VARCHAR}, #{bordertransportmeansId,jdbcType=DECIMAL}, 
+      #{additionalinformation,jdbcType=VARCHAR}, #{messageid,jdbcType=VARCHAR}, #{messagetype,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.LoadReport">
+    insert into   LOAD_REPORT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="loadReportId != null">
+        LOAD_REPORT_ID,
+      </if>
+      <if test="carrierid != null">
+        CARRIERID,
+      </if>
+      <if test="bordertransportmeansId != null">
+        BORDERTRANSPORTMEANS_ID,
+      </if>
+      <if test="additionalinformation != null">
+        ADDITIONALINFORMATION,
+      </if>
+      <if test="messageid != null">
+        MESSAGEID,
+      </if>
+      <if test="messagetype != null">
+        MESSAGETYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="loadReportId != null">
+        #{loadReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="carrierid != null">
+        #{carrierid,jdbcType=VARCHAR},
+      </if>
+      <if test="bordertransportmeansId != null">
+        #{bordertransportmeansId,jdbcType=DECIMAL},
+      </if>
+      <if test="additionalinformation != null">
+        #{additionalinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="messageid != null">
+        #{messageid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetype != null">
+        #{messagetype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.LoadReport">
+    update   LOAD_REPORT
+    <set>
+      <if test="carrierid != null">
+        CARRIERID = #{carrierid,jdbcType=VARCHAR},
+      </if>
+      <if test="bordertransportmeansId != null">
+        BORDERTRANSPORTMEANS_ID = #{bordertransportmeansId,jdbcType=DECIMAL},
+      </if>
+      <if test="additionalinformation != null">
+        ADDITIONALINFORMATION = #{additionalinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="messageid != null">
+        MESSAGEID = #{messageid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetype != null">
+        MESSAGETYPE = #{messagetype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where LOAD_REPORT_ID = #{loadReportId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.LoadReport">
+    update   LOAD_REPORT
+    set CARRIERID = #{carrierid,jdbcType=VARCHAR},
+      BORDERTRANSPORTMEANS_ID = #{bordertransportmeansId,jdbcType=DECIMAL},
+      ADDITIONALINFORMATION = #{additionalinformation,jdbcType=VARCHAR},
+      MESSAGEID = #{messageid,jdbcType=VARCHAR},
+      MESSAGETYPE = #{messagetype,jdbcType=VARCHAR}
+    where LOAD_REPORT_ID = #{loadReportId,jdbcType=VARCHAR}
+  </update>
+</mapper>

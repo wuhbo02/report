@@ -1,0 +1,7 @@
+[10:51:15:642] [ERROR] - com.alibaba.druid.pool.DruidAbstractDataSource.setDriverClassName(DruidAbstractDataSource.java:1127) - oracle.jdbc.driver.OracleDriver is deprecated.
+[16:26:18:991] [ERROR] - com.alibaba.druid.pool.DruidAbstractDataSource.setDriverClassName(DruidAbstractDataSource.java:1127) - oracle.jdbc.driver.OracleDriver is deprecated.
+[16:45:40:644] [ERROR] - com.alibaba.druid.pool.DruidAbstractDataSource.setDriverClassName(DruidAbstractDataSource.java:1127) - oracle.jdbc.driver.OracleDriver is deprecated.
+[16:57:53:072] [ERROR] - com.alibaba.druid.pool.DruidAbstractDataSource.setDriverClassName(DruidAbstractDataSource.java:1127) - oracle.jdbc.driver.OracleDriver is deprecated.
+[17:03:37:747] [ERROR] - com.alibaba.druid.pool.DruidAbstractDataSource.setDriverClassName(DruidAbstractDataSource.java:1127) - oracle.jdbc.driver.OracleDriver is deprecated.
+[17:06:28:190] [ERROR] - com.alibaba.druid.pool.DruidAbstractDataSource.setDriverClassName(DruidAbstractDataSource.java:1127) - oracle.jdbc.driver.OracleDriver is deprecated.
+[18:09:26:559] [ERROR] - com.alibaba.druid.pool.DruidAbstractDataSource.setDriverClassName(DruidAbstractDataSource.java:1127) - oracle.jdbc.driver.OracleDriver is deprecated.

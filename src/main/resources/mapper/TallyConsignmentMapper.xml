@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.TallyConsignmentMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.TallyConsignment">
+    <id column="TALLY_CONSIGNMENT_ID" jdbcType="DECIMAL" property="tallyConsignmentId" />
+    <result column="TALLY_REPORT_ID" jdbcType="VARCHAR" property="tallyReportId" />
+    <result column="CONSIGNMENT_ID" jdbcType="DECIMAL" property="consignmentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TALLY_CONSIGNMENT_ID, TALLY_REPORT_ID, CONSIGNMENT_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   TALLY_CONSIGNMENT
+    where TALLY_CONSIGNMENT_ID = #{tallyConsignmentId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from   TALLY_CONSIGNMENT
+    where TALLY_CONSIGNMENT_ID = #{tallyConsignmentId,jdbcType=DECIMAL}
+  </delete>
+
+  <insert id="insert" parameterType="com.gdin.report.entity.TallyConsignment">
+    <selectKey keyProperty="tallyConsignmentId" order="BEFORE" resultType="DECIMAL">
+      SELECT TALLY_CONSIGNMENT_SEQ.nextval tallyConsignmentId from dual
+    </selectKey>
+
+    insert into   TALLY_CONSIGNMENT (TALLY_CONSIGNMENT_ID, TALLY_REPORT_ID, 
+      CONSIGNMENT_ID)
+    values (#{tallyConsignmentId,jdbcType=DECIMAL}, #{tallyReportId,jdbcType=VARCHAR}, 
+      #{consignmentId,jdbcType=DECIMAL})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.TallyConsignment">
+    insert into   TALLY_CONSIGNMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tallyConsignmentId != null">
+        TALLY_CONSIGNMENT_ID,
+      </if>
+      <if test="tallyReportId != null">
+        TALLY_REPORT_ID,
+      </if>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tallyConsignmentId != null">
+        #{tallyConsignmentId,jdbcType=DECIMAL},
+      </if>
+      <if test="tallyReportId != null">
+        #{tallyReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentId != null">
+        #{consignmentId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.TallyConsignment">
+    update   TALLY_CONSIGNMENT
+    <set>
+      <if test="tallyReportId != null">
+        TALLY_REPORT_ID = #{tallyReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where TALLY_CONSIGNMENT_ID = #{tallyConsignmentId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.TallyConsignment">
+    update   TALLY_CONSIGNMENT
+    set TALLY_REPORT_ID = #{tallyReportId,jdbcType=VARCHAR},
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL}
+    where TALLY_CONSIGNMENT_ID = #{tallyConsignmentId,jdbcType=DECIMAL}
+  </update>
+</mapper>

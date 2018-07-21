@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.MessageAllMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.MessageAll">
+    <id column="MESSAGE_ALL_ID" jdbcType="VARCHAR" property="messageAllId" />
+    <result column="DECLARATIONOFFICEID" jdbcType="VARCHAR" property="declarationofficeid" />
+    <result column="BORDERTRANSPORTMEANS_ID" jdbcType="DECIMAL" property="bordertransportmeansId" />
+    <result column="TALLYPARTYID" jdbcType="VARCHAR" property="tallypartyid" />
+    <result column="CONTACT_ID" jdbcType="VARCHAR" property="contactId" />
+    <result column="UNLOADINGLOCATIONID" jdbcType="VARCHAR" property="unloadinglocationid" />
+    <result column="ARRIVALDATE" jdbcType="VARCHAR" property="arrivaldate" />
+    <result column="ADDITIONALINFORMATION" jdbcType="VARCHAR" property="additionalinformation" />
+    <result column="REPRESENTATIVEPERSONNAME" jdbcType="VARCHAR" property="representativepersonname" />
+    <result column="EXITCUSTOMSOFFICEID" jdbcType="VARCHAR" property="exitcustomsofficeid" />
+    <result column="AGENTID" jdbcType="VARCHAR" property="agentid" />
+    <result column="CARRIERID" jdbcType="VARCHAR" property="carrierid" />
+    <result column="REPRESENTATIVEPERSON" jdbcType="VARCHAR" property="representativeperson" />
+    <result column="JOURNEYID" jdbcType="VARCHAR" property="journeyid" />
+    <result column="CHANGEBORDERTRANSPORTMEANS_ID" jdbcType="VARCHAR" property="changebordertransportmeansId" />
+    <result column="IMPORT_SHIP_FIRST_ID" jdbcType="DECIMAL" property="importShipFirstId" />
+    <result column="EXPORT_SHIP_FIRST_ID" jdbcType="DECIMAL" property="exportShipFirstId" />
+    <result column="MESSAGEID" jdbcType="VARCHAR" property="messageid" />
+    <result column="MESSAGETYPE" jdbcType="VARCHAR" property="messagetype" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    MESSAGE_ALL_ID, DECLARATIONOFFICEID, BORDERTRANSPORTMEANS_ID, TALLYPARTYID, CONTACT_ID, 
+    UNLOADINGLOCATIONID, ARRIVALDATE, ADDITIONALINFORMATION, REPRESENTATIVEPERSONNAME, 
+    EXITCUSTOMSOFFICEID, AGENTID, CARRIERID, REPRESENTATIVEPERSON, JOURNEYID, CHANGEBORDERTRANSPORTMEANS_ID, 
+    IMPORT_SHIP_FIRST_ID, EXPORT_SHIP_FIRST_ID, MESSAGEID, MESSAGETYPE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   MESSAGE_ALL
+    where MESSAGE_ALL_ID = #{messageAllId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from   MESSAGE_ALL
+    where MESSAGE_ALL_ID = #{messageAllId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gdin.report.entity.MessageAll">
+    insert into   MESSAGE_ALL (MESSAGE_ALL_ID, DECLARATIONOFFICEID,
+      BORDERTRANSPORTMEANS_ID, TALLYPARTYID, CONTACT_ID, 
+      UNLOADINGLOCATIONID, ARRIVALDATE, ADDITIONALINFORMATION, 
+      REPRESENTATIVEPERSONNAME, EXITCUSTOMSOFFICEID, 
+      AGENTID, CARRIERID, REPRESENTATIVEPERSON, 
+      JOURNEYID, CHANGEBORDERTRANSPORTMEANS_ID, 
+      IMPORT_SHIP_FIRST_ID, EXPORT_SHIP_FIRST_ID, MESSAGEID, 
+      MESSAGETYPE)
+    values (#{messageAllId,jdbcType=VARCHAR}, #{declarationofficeid,jdbcType=VARCHAR}, 
+      #{bordertransportmeansId,jdbcType=DECIMAL}, #{tallypartyid,jdbcType=VARCHAR}, #{contactId,jdbcType=VARCHAR}, 
+      #{unloadinglocationid,jdbcType=VARCHAR}, #{arrivaldate,jdbcType=VARCHAR}, #{additionalinformation,jdbcType=VARCHAR}, 
+      #{representativepersonname,jdbcType=VARCHAR}, #{exitcustomsofficeid,jdbcType=VARCHAR}, 
+      #{agentid,jdbcType=VARCHAR}, #{carrierid,jdbcType=VARCHAR}, #{representativeperson,jdbcType=VARCHAR}, 
+      #{journeyid,jdbcType=VARCHAR}, #{changebordertransportmeansId,jdbcType=VARCHAR}, 
+      #{importShipFirstId,jdbcType=DECIMAL}, #{exportShipFirstId,jdbcType=DECIMAL}, #{messageid,jdbcType=VARCHAR}, 
+      #{messagetype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.MessageAll">
+    insert into   MESSAGE_ALL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="messageAllId != null">
+        MESSAGE_ALL_ID,
+      </if>
+      <if test="declarationofficeid != null">
+        DECLARATIONOFFICEID,
+      </if>
+      <if test="bordertransportmeansId != null">
+        BORDERTRANSPORTMEANS_ID,
+      </if>
+      <if test="tallypartyid != null">
+        TALLYPARTYID,
+      </if>
+      <if test="contactId != null">
+        CONTACT_ID,
+      </if>
+      <if test="unloadinglocationid != null">
+        UNLOADINGLOCATIONID,
+      </if>
+      <if test="arrivaldate != null">
+        ARRIVALDATE,
+      </if>
+      <if test="additionalinformation != null">
+        ADDITIONALINFORMATION,
+      </if>
+      <if test="representativepersonname != null">
+        REPRESENTATIVEPERSONNAME,
+      </if>
+      <if test="exitcustomsofficeid != null">
+        EXITCUSTOMSOFFICEID,
+      </if>
+      <if test="agentid != null">
+        AGENTID,
+      </if>
+      <if test="carrierid != null">
+        CARRIERID,
+      </if>
+      <if test="representativeperson != null">
+        REPRESENTATIVEPERSON,
+      </if>
+      <if test="journeyid != null">
+        JOURNEYID,
+      </if>
+      <if test="changebordertransportmeansId != null">
+        CHANGEBORDERTRANSPORTMEANS_ID,
+      </if>
+      <if test="importShipFirstId != null">
+        IMPORT_SHIP_FIRST_ID,
+      </if>
+      <if test="exportShipFirstId != null">
+        EXPORT_SHIP_FIRST_ID,
+      </if>
+      <if test="messageid != null">
+        MESSAGEID,
+      </if>
+      <if test="messagetype != null">
+        MESSAGETYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="messageAllId != null">
+        #{messageAllId,jdbcType=VARCHAR},
+      </if>
+      <if test="declarationofficeid != null">
+        #{declarationofficeid,jdbcType=VARCHAR},
+      </if>
+      <if test="bordertransportmeansId != null">
+        #{bordertransportmeansId,jdbcType=DECIMAL},
+      </if>
+      <if test="tallypartyid != null">
+        #{tallypartyid,jdbcType=VARCHAR},
+      </if>
+      <if test="contactId != null">
+        #{contactId,jdbcType=VARCHAR},
+      </if>
+      <if test="unloadinglocationid != null">
+        #{unloadinglocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivaldate != null">
+        #{arrivaldate,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalinformation != null">
+        #{additionalinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="representativepersonname != null">
+        #{representativepersonname,jdbcType=VARCHAR},
+      </if>
+      <if test="exitcustomsofficeid != null">
+        #{exitcustomsofficeid,jdbcType=VARCHAR},
+      </if>
+      <if test="agentid != null">
+        #{agentid,jdbcType=VARCHAR},
+      </if>
+      <if test="carrierid != null">
+        #{carrierid,jdbcType=VARCHAR},
+      </if>
+      <if test="representativeperson != null">
+        #{representativeperson,jdbcType=VARCHAR},
+      </if>
+      <if test="journeyid != null">
+        #{journeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="changebordertransportmeansId != null">
+        #{changebordertransportmeansId,jdbcType=VARCHAR},
+      </if>
+      <if test="importShipFirstId != null">
+        #{importShipFirstId,jdbcType=DECIMAL},
+      </if>
+      <if test="exportShipFirstId != null">
+        #{exportShipFirstId,jdbcType=DECIMAL},
+      </if>
+      <if test="messageid != null">
+        #{messageid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetype != null">
+        #{messagetype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.MessageAll">
+    update   MESSAGE_ALL
+    <set>
+      <if test="declarationofficeid != null">
+        DECLARATIONOFFICEID = #{declarationofficeid,jdbcType=VARCHAR},
+      </if>
+      <if test="bordertransportmeansId != null">
+        BORDERTRANSPORTMEANS_ID = #{bordertransportmeansId,jdbcType=DECIMAL},
+      </if>
+      <if test="tallypartyid != null">
+        TALLYPARTYID = #{tallypartyid,jdbcType=VARCHAR},
+      </if>
+      <if test="contactId != null">
+        CONTACT_ID = #{contactId,jdbcType=VARCHAR},
+      </if>
+      <if test="unloadinglocationid != null">
+        UNLOADINGLOCATIONID = #{unloadinglocationid,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivaldate != null">
+        ARRIVALDATE = #{arrivaldate,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalinformation != null">
+        ADDITIONALINFORMATION = #{additionalinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="representativepersonname != null">
+        REPRESENTATIVEPERSONNAME = #{representativepersonname,jdbcType=VARCHAR},
+      </if>
+      <if test="exitcustomsofficeid != null">
+        EXITCUSTOMSOFFICEID = #{exitcustomsofficeid,jdbcType=VARCHAR},
+      </if>
+      <if test="agentid != null">
+        AGENTID = #{agentid,jdbcType=VARCHAR},
+      </if>
+      <if test="carrierid != null">
+        CARRIERID = #{carrierid,jdbcType=VARCHAR},
+      </if>
+      <if test="representativeperson != null">
+        REPRESENTATIVEPERSON = #{representativeperson,jdbcType=VARCHAR},
+      </if>
+      <if test="journeyid != null">
+        JOURNEYID = #{journeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="changebordertransportmeansId != null">
+        CHANGEBORDERTRANSPORTMEANS_ID = #{changebordertransportmeansId,jdbcType=VARCHAR},
+      </if>
+      <if test="importShipFirstId != null">
+        IMPORT_SHIP_FIRST_ID = #{importShipFirstId,jdbcType=DECIMAL},
+      </if>
+      <if test="exportShipFirstId != null">
+        EXPORT_SHIP_FIRST_ID = #{exportShipFirstId,jdbcType=DECIMAL},
+      </if>
+      <if test="messageid != null">
+        MESSAGEID = #{messageid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetype != null">
+        MESSAGETYPE = #{messagetype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MESSAGE_ALL_ID = #{messageAllId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.MessageAll">
+    update   MESSAGE_ALL
+    set DECLARATIONOFFICEID = #{declarationofficeid,jdbcType=VARCHAR},
+      BORDERTRANSPORTMEANS_ID = #{bordertransportmeansId,jdbcType=DECIMAL},
+      TALLYPARTYID = #{tallypartyid,jdbcType=VARCHAR},
+      CONTACT_ID = #{contactId,jdbcType=VARCHAR},
+      UNLOADINGLOCATIONID = #{unloadinglocationid,jdbcType=VARCHAR},
+      ARRIVALDATE = #{arrivaldate,jdbcType=VARCHAR},
+      ADDITIONALINFORMATION = #{additionalinformation,jdbcType=VARCHAR},
+      REPRESENTATIVEPERSONNAME = #{representativepersonname,jdbcType=VARCHAR},
+      EXITCUSTOMSOFFICEID = #{exitcustomsofficeid,jdbcType=VARCHAR},
+      AGENTID = #{agentid,jdbcType=VARCHAR},
+      CARRIERID = #{carrierid,jdbcType=VARCHAR},
+      REPRESENTATIVEPERSON = #{representativeperson,jdbcType=VARCHAR},
+      JOURNEYID = #{journeyid,jdbcType=VARCHAR},
+      CHANGEBORDERTRANSPORTMEANS_ID = #{changebordertransportmeansId,jdbcType=VARCHAR},
+      IMPORT_SHIP_FIRST_ID = #{importShipFirstId,jdbcType=DECIMAL},
+      EXPORT_SHIP_FIRST_ID = #{exportShipFirstId,jdbcType=DECIMAL},
+      MESSAGEID = #{messageid,jdbcType=VARCHAR},
+      MESSAGETYPE = #{messagetype,jdbcType=VARCHAR}
+    where MESSAGE_ALL_ID = #{messageAllId,jdbcType=VARCHAR}
+  </update>
+</mapper>

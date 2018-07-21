@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.ChgTransportMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.ChgTransport">
+    <id column="CHG_TRANSPORT_ID" jdbcType="VARCHAR" property="chgTransportId" />
+    <result column="BORDERTRANSPORTMEANS_ID" jdbcType="DECIMAL" property="bordertransportmeansId" />
+    <result column="CHANGEBORDERTRANSPORTMEANS_ID" jdbcType="DECIMAL" property="changebordertransportmeansId" />
+    <result column="ADDITIONALINFORMATION" jdbcType="VARCHAR" property="additionalinformation" />
+    <result column="MESSAGEID" jdbcType="VARCHAR" property="messageid" />
+    <result column="MESSAGETYPE" jdbcType="VARCHAR" property="messagetype" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CHG_TRANSPORT_ID, BORDERTRANSPORTMEANS_ID, CHANGEBORDERTRANSPORTMEANS_ID, ADDITIONALINFORMATION, 
+    MESSAGEID, MESSAGETYPE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   CHG_TRANSPORT
+    where CHG_TRANSPORT_ID = #{chgTransportId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from   CHG_TRANSPORT
+    where CHG_TRANSPORT_ID = #{chgTransportId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gdin.report.entity.ChgTransport">
+    insert into   CHG_TRANSPORT (CHG_TRANSPORT_ID, BORDERTRANSPORTMEANS_ID,
+      CHANGEBORDERTRANSPORTMEANS_ID, ADDITIONALINFORMATION, 
+      MESSAGEID, MESSAGETYPE)
+    values (#{chgTransportId,jdbcType=VARCHAR}, #{bordertransportmeansId,jdbcType=DECIMAL}, 
+      #{changebordertransportmeansId,jdbcType=DECIMAL}, #{additionalinformation,jdbcType=VARCHAR}, 
+      #{messageid,jdbcType=VARCHAR}, #{messagetype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.ChgTransport">
+    insert into   CHG_TRANSPORT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="chgTransportId != null">
+        CHG_TRANSPORT_ID,
+      </if>
+      <if test="bordertransportmeansId != null">
+        BORDERTRANSPORTMEANS_ID,
+      </if>
+      <if test="changebordertransportmeansId != null">
+        CHANGEBORDERTRANSPORTMEANS_ID,
+      </if>
+      <if test="additionalinformation != null">
+        ADDITIONALINFORMATION,
+      </if>
+      <if test="messageid != null">
+        MESSAGEID,
+      </if>
+      <if test="messagetype != null">
+        MESSAGETYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="chgTransportId != null">
+        #{chgTransportId,jdbcType=VARCHAR},
+      </if>
+      <if test="bordertransportmeansId != null">
+        #{bordertransportmeansId,jdbcType=DECIMAL},
+      </if>
+      <if test="changebordertransportmeansId != null">
+        #{changebordertransportmeansId,jdbcType=DECIMAL},
+      </if>
+      <if test="additionalinformation != null">
+        #{additionalinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="messageid != null">
+        #{messageid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetype != null">
+        #{messagetype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.ChgTransport">
+    update   CHG_TRANSPORT
+    <set>
+      <if test="bordertransportmeansId != null">
+        BORDERTRANSPORTMEANS_ID = #{bordertransportmeansId,jdbcType=DECIMAL},
+      </if>
+      <if test="changebordertransportmeansId != null">
+        CHANGEBORDERTRANSPORTMEANS_ID = #{changebordertransportmeansId,jdbcType=DECIMAL},
+      </if>
+      <if test="additionalinformation != null">
+        ADDITIONALINFORMATION = #{additionalinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="messageid != null">
+        MESSAGEID = #{messageid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetype != null">
+        MESSAGETYPE = #{messagetype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CHG_TRANSPORT_ID = #{chgTransportId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.ChgTransport">
+    update   CHG_TRANSPORT
+    set BORDERTRANSPORTMEANS_ID = #{bordertransportmeansId,jdbcType=DECIMAL},
+      CHANGEBORDERTRANSPORTMEANS_ID = #{changebordertransportmeansId,jdbcType=DECIMAL},
+      ADDITIONALINFORMATION = #{additionalinformation,jdbcType=VARCHAR},
+      MESSAGEID = #{messageid,jdbcType=VARCHAR},
+      MESSAGETYPE = #{messagetype,jdbcType=VARCHAR}
+    where CHG_TRANSPORT_ID = #{chgTransportId,jdbcType=VARCHAR}
+  </update>
+</mapper>

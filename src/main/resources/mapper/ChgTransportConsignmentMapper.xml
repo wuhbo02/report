@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdin.report.dao.ChgTransportConsignmentMapper">
+  <resultMap id="BaseResultMap" type="com.gdin.report.entity.ChgTransportConsignment">
+    <id column="CHG_TRANSPORT_CONSIGNMENT_ID" jdbcType="DECIMAL" property="chgTransportConsignmentId" />
+    <result column="CHG_TRANSPORT_ID" jdbcType="VARCHAR" property="chgTransportId" />
+    <result column="CONSIGNMENT_ID" jdbcType="DECIMAL" property="consignmentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CHG_TRANSPORT_CONSIGNMENT_ID, CHG_TRANSPORT_ID, CONSIGNMENT_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   CHG_TRANSPORT_CONSIGNMENT
+    where CHG_TRANSPORT_CONSIGNMENT_ID = #{chgTransportConsignmentId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from   CHG_TRANSPORT_CONSIGNMENT
+    where CHG_TRANSPORT_CONSIGNMENT_ID = #{chgTransportConsignmentId,jdbcType=DECIMAL}
+  </delete>
+
+  <insert id="insert" parameterType="com.gdin.report.entity.ChgTransportConsignment">
+
+    <selectKey keyProperty="chgTransportConsignmentId" order="BEFORE" resultType="DECIMAL">
+      SELECT CHG_TRANSPORT_CONSIGNMENT_SEQ.nextval chgTransportConsignmentId from dual
+    </selectKey>
+
+    insert into   CHG_TRANSPORT_CONSIGNMENT (CHG_TRANSPORT_CONSIGNMENT_ID, CHG_TRANSPORT_ID,
+      CONSIGNMENT_ID)
+    values (#{chgTransportConsignmentId,jdbcType=DECIMAL}, #{chgTransportId,jdbcType=VARCHAR}, 
+      #{consignmentId,jdbcType=DECIMAL})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.gdin.report.entity.ChgTransportConsignment">
+    insert into   CHG_TRANSPORT_CONSIGNMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="chgTransportConsignmentId != null">
+        CHG_TRANSPORT_CONSIGNMENT_ID,
+      </if>
+      <if test="chgTransportId != null">
+        CHG_TRANSPORT_ID,
+      </if>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="chgTransportConsignmentId != null">
+        #{chgTransportConsignmentId,jdbcType=DECIMAL},
+      </if>
+      <if test="chgTransportId != null">
+        #{chgTransportId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentId != null">
+        #{consignmentId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdin.report.entity.ChgTransportConsignment">
+    update   CHG_TRANSPORT_CONSIGNMENT
+    <set>
+      <if test="chgTransportId != null">
+        CHG_TRANSPORT_ID = #{chgTransportId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentId != null">
+        CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where CHG_TRANSPORT_CONSIGNMENT_ID = #{chgTransportConsignmentId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdin.report.entity.ChgTransportConsignment">
+    update   CHG_TRANSPORT_CONSIGNMENT
+    set CHG_TRANSPORT_ID = #{chgTransportId,jdbcType=VARCHAR},
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=DECIMAL}
+    where CHG_TRANSPORT_CONSIGNMENT_ID = #{chgTransportConsignmentId,jdbcType=DECIMAL}
+  </update>
+</mapper>
