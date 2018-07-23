@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TransitDestination {
 
-    @XmlElement(name = "ID", required = true)
+    @XmlElement(name = "ID")
     protected String id;
 
     /**

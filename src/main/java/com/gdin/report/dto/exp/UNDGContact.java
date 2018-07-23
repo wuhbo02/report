@@ -47,7 +47,7 @@ public class UNDGContact {
 
     @XmlElement(name = "Name")
     protected String name;
-    @XmlElement(name = "Communication", required = true)
+    @XmlElement(name = "Communication")
     protected List<Communication> communication;
 
     /**

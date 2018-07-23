@@ -54,15 +54,17 @@ public class ImportReportService {
     private  ConsignmentitemEquipmentService consignmentitemEquipmentService;
 
 
-
+    @Transactional
     int deleteByPrimaryKey(String importReportId){
         return importReportMapper.deleteByPrimaryKey(importReportId);
     }
 
+    @Transactional
     int insert(ImportReport record){
         return importReportMapper.insert(record);
     }
 
+    @Transactional
     int insertSelective(ImportReport record){
         return importReportMapper.insertSelective(record);
     }
@@ -71,10 +73,12 @@ public class ImportReportService {
         return importReportMapper.selectByPrimaryKey(importReportId);
     }
 
+    @Transactional
     int updateByPrimaryKeySelective(ImportReport record){
         return importReportMapper.updateByPrimaryKeySelective(record);
     }
 
+    @Transactional
     int updateByPrimaryKey(ImportReport record){
         return importReportMapper.updateByPrimaryKey(record);
     }
@@ -199,20 +203,11 @@ public class ImportReportService {
                         contactEntiry.setContactId(consignee.getID());
                         contactEntiry.setAeo(consignee.getAEO());
                         if (consignee.getAddress() != null) {
-                            Address address = new Address();
-                            address.setCityname(consignee.getAddress().getCityName());
-                            address.setCountrysubentityname(consignee.getAddress().getCountrySubEntityName());
-                            address.setCountrycode(consignee.getAddress().getCountryCode());
-                            address.setCountrysubentityid(consignee.getAddress().getCountrySubEntityID());
-                            address.setLine(consignee.getAddress().getLine());
-                            address.setPostcodeid(consignee.getAddress().getPostcodeID());
-
-                            addressService.insert(address);
+                            Address address = addressService.saveAddress(consignee.getAddress());
                             contactEntiry.setAddressId(address.getAddressId());
                         }
 
                         Contact contact = contactService.save(contactEntiry, consignee.getCommunication());
-
                         peopleids.add(consignee.getID()); // //临时存放人员id，免重复添加
                     }
 
@@ -220,7 +215,6 @@ public class ImportReportService {
                     if(consignee.getContact()!=null){
                         Contact contactEntiry = new Contact();
                         contactEntiry.setName(consignee.getContact().getName());
-
                         Contact contact = contactService.save(contactEntiry, consignee.getContact().getCommunication());
                         consignmentEntity.setContactId(contact.getContactId());
                     }
@@ -237,20 +231,10 @@ public class ImportReportService {
                         contactEntiry.setContactId(consignor.getID());
                         contactEntiry.setAeo(consignor.getAEO());
                         if (consignor.getAddress() != null) {
-                            Address address = new Address();
-                            address.setCityname(consignor.getAddress().getCityName());
-                            address.setCountrysubentityname(consignor.getAddress().getCountrySubEntityName());
-                            address.setCountrycode(consignor.getAddress().getCountryCode());
-                            address.setCountrysubentityid(consignor.getAddress().getCountrySubEntityID());
-                            address.setLine(consignor.getAddress().getLine());
-                            address.setPostcodeid(consignor.getAddress().getPostcodeID());
-
-                            addressService.insert(address);
+                            Address address = addressService.saveAddress(consignor.getAddress());
                             contactEntiry.setAddressId(address.getAddressId());
                         }
-
                         Contact contact = contactService.save(contactEntiry, consignor.getCommunication());
-
                         peopleids.add(consignor.getID()); // //临时存放人员id，免重复添加
                     }
                 }
@@ -295,15 +279,7 @@ public class ImportReportService {
                         contactEntiry.setContactId(notifyParty.getID());
 
                         if (notifyParty.getAddress() != null) {
-                            Address address = new Address();
-                            address.setCityname(notifyParty.getAddress().getCityName());
-                            address.setCountrysubentityname(notifyParty.getAddress().getCountrySubEntityName());
-                            address.setCountrycode(notifyParty.getAddress().getCountryCode());
-                            address.setCountrysubentityid(notifyParty.getAddress().getCountrySubEntityID());
-                            address.setLine(notifyParty.getAddress().getLine());
-                            address.setPostcodeid(notifyParty.getAddress().getPostcodeID());
-
-                            addressService.insert(address);
+                            Address address = addressService.saveAddress(notifyParty.getAddress());
                             contactEntiry.setAddressId(address.getAddressId());
                         }
 

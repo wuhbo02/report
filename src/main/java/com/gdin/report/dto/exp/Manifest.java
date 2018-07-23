@@ -48,9 +48,9 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement(name="Manifest")
 public class Manifest {
 
-    @XmlElement(name = "Head", required = true)
+    @XmlElement(name = "Head")
     protected Head head;
-    @XmlElement(name = "Declaration", required = true)
+    @XmlElement(name = "Declaration")
     protected Declaration declaration;
 
     /**

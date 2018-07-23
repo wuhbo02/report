@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Origin {
 
-    @XmlElement(name = "OriginCountryCode", required = true)
+    @XmlElement(name = "OriginCountryCode")
     protected String originCountryCode;
 
     /**

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Manifest xmlns="urn:Declaration:datamodel:standard:CN:MT1101:1">
+<!-- urn:Declaration:datamodel:standard:CN:MT1101:1 -->
+<Manifest xmlnsbak="urn:Declaration:datamodel22:standard:CN:MT1101:1 ">
 	<Head>
 		<MessageID>CN_MT1101_1p1_6020190358598_20171120153012057</MessageID>
 		<FunctionCode>9</FunctionCode>

@@ -43,9 +43,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class ConsignmentPackaging {
 
-    @XmlElement(name = "QuantityQuantity", required = true)
+    @XmlElement(name = "QuantityQuantity")
     protected String quantityQuantity;
-    @XmlElement(name = "TypeCode", required = true)
+    @XmlElement(name = "TypeCode")
     protected String typeCode;
 
     /**

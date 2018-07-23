@@ -53,11 +53,11 @@ public class Consignor {
 
     @XmlElement(name = "ID")
     protected String id;
-    @XmlElement(name = "Name", required = true)
+    @XmlElement(name = "Name")
     protected String name;
     @XmlElement(name = "Address")
     protected ConsignorAddress address;
-    @XmlElement(name = "Communication", required = true)
+    @XmlElement(name = "Communication")
     protected List<Communication> communication;
     @XmlElement(name = "AEO")
     protected String aeo;

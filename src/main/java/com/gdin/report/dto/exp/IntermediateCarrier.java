@@ -47,7 +47,7 @@ public class IntermediateCarrier {
 
     @XmlElement(name = "ID")
     protected String id;
-    @XmlElement(name = "Communication", required = true)
+    @XmlElement(name = "Communication")
     protected List<Communication> communication;
 
     /**

@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Commodity {
 
-    @XmlElement(name = "CargoDescription", required = true)
+    @XmlElement(name = "CargoDescription")
     protected   String cargoDescription;
     @XmlElement(name = "UNDGCode")
     protected   String undgCode;

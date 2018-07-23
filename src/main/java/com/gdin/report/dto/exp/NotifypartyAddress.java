@@ -51,7 +51,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class NotifypartyAddress {
 
-    @XmlElement(name = "Line", required = true)
+    @XmlElement(name = "Line")
     protected String line;
     @XmlElement(name = "CityName")
     protected String cityName;

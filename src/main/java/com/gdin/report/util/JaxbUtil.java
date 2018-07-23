@@ -15,7 +15,7 @@ import javax.xml.bind.Unmarshaller;
  */
 public class JaxbUtil {
     public static void main(String arg[]){
-        InputStream fis = JaxbUtil.class.getResourceAsStream("/1.xml");
+        InputStream fis = JaxbUtil.class.getResourceAsStream("/2.xml");
         String rs = "";
         try {
             //最后的"GBK"根据文件属性而定，如果不行，改成"UTF-8"试试
@@ -23,7 +23,7 @@ public class JaxbUtil {
             BufferedReader br = new BufferedReader(reader);
             String line;
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
+                //System.out.println(line);
                 rs += line;
             }
             br.close();

@@ -31,7 +31,8 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Manifest_QNAME = new QName("urn:Declaration:datamodel:standard:CN:MT1101:1", "Manifest");
+    //urn:Declaration:datamodel:standard:CN:MT1101:1
+    private final static QName _Manifest_QNAME = new QName("", "Manifest");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.gdin.report.dto
@@ -412,7 +413,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link Manifest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:Declaration:datamodel:standard:CN:MT1101:1", name = "Manifest")
+    @XmlElementDecl(namespace = "", name = "Manifest")
     public JAXBElement<Manifest> createManifest(Manifest value) {
         return new JAXBElement<Manifest>(_Manifest_QNAME, Manifest.class, null, value);
     }

@@ -59,21 +59,21 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class ConsignmentItem {
 
-    @XmlElement(name = "SequenceNumeric", required = true)
+    @XmlElement(name = "SequenceNumeric")
     protected String sequenceNumeric;
-    @XmlElement(name = "ConsignmentItemPackaging", required = true)
+    @XmlElement(name = "ConsignmentItemPackaging")
     protected ConsignmentItemPackaging consignmentItemPackaging;
-    @XmlElement(name = "Commodity", required = true)
+    @XmlElement(name = "Commodity")
     protected Commodity commodity;
     @XmlElement(name = "AdditionalInformation")
     protected AdditionalInformation additionalInformation;
-    @XmlElement(name = "GoodsMeasure", required = true)
+    @XmlElement(name = "GoodsMeasure")
     protected GoodsMeasure goodsMeasure;
-    @XmlElement(name = "EquipmentIdentification", required = true)
+    @XmlElement(name = "EquipmentIdentification")
     protected List<EquipmentIdentification> equipmentIdentification;
     @XmlElement(name = "CustomsProcedure")
     protected CustomsProcedure customsProcedure;
-    @XmlElement(name = "UCR", required = true)
+    @XmlElement(name = "UCR")
     protected List<UCR> ucr;
     @XmlElement(name = "Origin")
     protected Origin origin;

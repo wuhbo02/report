@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class CustomsProcedure {
 
-    @XmlElement(name = "CurrentCode", required = true)
+    @XmlElement(name = "CurrentCode")
     protected String currentCode;
 
     /**

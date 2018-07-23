@@ -6,5 +6,7 @@
 //
 
 //urn:Declaration:datamodel:standard:CN:MT1101:1
-@javax.xml.bind.annotation.XmlSchema(namespace = "urn:Declaration:datamodel:standard:CN:MT1101:1", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+
+//urn:Declaration:datamodel:standard:CN:MT1101:1
+@javax.xml.bind.annotation.XmlSchema(namespace = "", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package com.gdin.report.dto.exp;

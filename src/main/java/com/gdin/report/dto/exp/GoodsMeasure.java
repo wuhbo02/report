@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class GoodsMeasure {
 
-    @XmlElement(name = "GrossMassMeasure", required = true)
+    @XmlElement(name = "GrossMassMeasure")
     protected String grossMassMeasure;
 
     /**

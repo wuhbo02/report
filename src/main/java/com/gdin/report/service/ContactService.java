@@ -4,14 +4,19 @@ import com.gdin.report.dao.ContactMapper;
 import com.gdin.report.entity.Contact;
 import com.gdin.report.entity.ContactCommunication;
 import com.gdin.report.util.DateUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class ContactService {
+    private static Logger logger = LogManager.getLogger();
+
     @Autowired
     private ContactMapper contactMapper;
     @Autowired
@@ -20,15 +25,17 @@ public class ContactService {
     private ContactCommunicationService contactCommunicationService;
 
 
-
+    @Transactional
     int deleteByPrimaryKey(String contactId){
         return contactMapper.deleteByPrimaryKey(contactId);
     }
 
+    @Transactional
     int insert(Contact record){
         return contactMapper.insert(record);
     }
 
+    @Transactional
     int insertSelective(Contact record){
         return contactMapper.insertSelective(record);
     }
@@ -37,10 +44,12 @@ public class ContactService {
         return contactMapper.selectByPrimaryKey(contactId);
     }
 
+    @Transactional
     int updateByPrimaryKeySelective(Contact record){
         return contactMapper.updateByPrimaryKeySelective(record);
     }
 
+    @Transactional
     int updateByPrimaryKey(Contact record){
         return contactMapper.updateByPrimaryKey(record);
     }
@@ -51,6 +60,7 @@ public class ContactService {
      * @param list
      * @return
      */
+    @Transactional
     public Contact save(Contact record, List<com.gdin.report.dto.exp.Communication> list){
         if(record==null){
             return record;
@@ -81,7 +91,11 @@ public class ContactService {
                 ContactCommunication contactCommunication = new ContactCommunication();
                 contactCommunication.setCommunicationId(obj.getID());
                 contactCommunication.setContactId(record.getContactId());
-                contactCommunicationService.insert(contactCommunication);
+                try {
+                    contactCommunicationService.insert(contactCommunication);
+                }catch (Exception e){
+                    logger.error("--添加联系人通信工具关系表Exception:"+e.getMessage());
+                }
             }
         }
 

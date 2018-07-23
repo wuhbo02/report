@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class FreightPayment {
 
-    @XmlElement(name = "MethodCode", required = true)
+    @XmlElement(name = "MethodCode")
     protected String methodCode;
 
     /**

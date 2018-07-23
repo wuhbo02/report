@@ -43,9 +43,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class PreviousCustomsDocument {
 
-    @XmlElement(name = "ID", required = true)
+    @XmlElement(name = "ID")
     protected String id;
-    @XmlElement(name = "TypeCode", required = true)
+    @XmlElement(name = "TypeCode")
     protected String typeCode;
 
     /**

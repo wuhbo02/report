@@ -53,19 +53,19 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Head {
 
-    @XmlElement(name = "MessageID", required = true)
+    @XmlElement(name = "MessageID")
     protected String messageID;
-    @XmlElement(name = "FunctionCode", required = true)
+    @XmlElement(name = "FunctionCode")
     protected String functionCode;
-    @XmlElement(name = "MessageType", required = true)
+    @XmlElement(name = "MessageType")
     protected String messageType;
-    @XmlElement(name = "SenderID", required = true)
+    @XmlElement(name = "SenderID")
     protected String senderID;
-    @XmlElement(name = "ReceiverID", required = true)
+    @XmlElement(name = "ReceiverID")
     protected String receiverID;
-    @XmlElement(name = "SendTime", required = true)
+    @XmlElement(name = "SendTime")
     protected String sendTime;
-    @XmlElement(name = "Version", required = true)
+    @XmlElement(name = "Version")
     protected String version;
 
     /**

@@ -34,6 +34,37 @@ public class HandleService {
     private BordertransportmeansService bordertransportmeansService;
     @Autowired
     private ImportReportService importReportService;
+    @Autowired
+    private ExportReportService exportReportService;
+    @Autowired
+    private ArrivalReportService arrivalReportService;
+    @Autowired
+    private TallyReportService tallyReportService;
+    @Autowired
+    private LoadReportService loadReportService;
+    @Autowired
+    private DispatchReportService dispatchReportService;
+    @Autowired
+    private DistributeReportService distributeReportService;
+    @Autowired
+    private PackingReportService packingReportService;
+    @Autowired
+    private ChangePortService changePortService;
+    @Autowired
+    private ChgTransportService chgTransportService;
+    @Autowired
+    private OffLoadService offLoadService;
+    @Autowired
+    private OffLoadChgService offLoadChgService;
+    @Autowired
+    private TransferCheckService transferCheckService;
+    @Autowired
+    private EmptycontaService emptycontaService;
+
+
+
+
+
 
     public JSONResult handle(String xmlstr){
         JSONResult<Object> rs = new JSONResult<Object>();
@@ -91,25 +122,95 @@ public class HandleService {
 
                 //data = data.replace("xmlns=\"urn:Declaration:datamodel:standard:CN:MT1101:1\"","");
 
-                //运抵报告
-                if(data.contains("<MessageType>"+MsgType.getArrivalData()))
-                {
 
-                }//分流运抵报告
-                else if(data.contains("<MessageType>"+MsgType.getDistributeData()))
+                //1原始舱单 Import_Report
+                 if(data.contains("<MessageType>"+MsgType.IMPORT_SHIP) || data.contains("<MessageType>"+MsgType.IMPORT_AIR))
                 {
-
-                }
-                //原始舱单
-                else if(data.contains("<MessageType>"+MsgType.getImportData()))
-                {
-                    manifest = JaxbUtil.xmlToBean(data,Manifest.class);
+                    //xmlns命名空间，不要命名空间
+                    manifest = JaxbUtil.xmlToBean(data.replace("xmlns=","bakxmlns="),Manifest.class);
                     importReportService.save(copMsgId,msgType,manifest);
                 }
-                //预配舱单
-                else if(data.contains("<MessageType>"+MsgType.getExportData()))
+                //2预配舱单 Export_Report
+                else if(data.contains("<MessageType>"+MsgType.EXPORT_SHIP) || data.contains("<MessageType>"+MsgType.EXPORT_AIR))
                 {
-                     manifest = JaxbUtil.xmlToBean(data,Manifest.class);
+                     manifest = JaxbUtil.xmlToBean(data.replace("xmlns=","bakxmlns="),Manifest.class);
+                    exportReportService.save(copMsgId,msgType,manifest);
+                }
+                //3理货报告 Tally_report
+                else if(data.contains("<MessageType>"+MsgType.Tally_Ship_Import) || data.contains("<MessageType>"+MsgType.Tally_Ship_Export)
+                        || data.contains("<MessageType>"+MsgType.Tally_Air_Import) || data.contains("<MessageType>"+MsgType.Tally_Air_Export))
+                {
+                    manifest = JaxbUtil.xmlToBean(data.replace("xmlns=","bakxmlns="),Manifest.class);
+                    tallyReportService.save(copMsgId,msgType,manifest);
+                }
+                //4运抵报告 Arrival_report
+                else if(data.contains("<MessageType>"+MsgType.Arrival_Ship)||data.contains("<MessageType>"+MsgType.Arrival_Air)
+                        || data.contains("<MessageType>"+MsgType.Arrival_Ship_Distribute)||data.contains("<MessageType>"+MsgType.Arrival_Air_Distribute))
+                {
+                    manifest = JaxbUtil.xmlToBean(data.replace("xmlns=","bakxmlns="),Manifest.class);
+                    arrivalReportService.save(copMsgId,msgType,manifest);
+                }
+
+                //5装载舱单 Load_report
+                else if(data.contains("<MessageType>"+MsgType.Load_Ship) || data.contains("<MessageType>"+MsgType.Load_Air))
+                {
+                    manifest = JaxbUtil.xmlToBean(data.replace("xmlns=","bakxmlns="),Manifest.class);
+                    loadReportService.save(copMsgId,msgType,manifest);
+                }
+                //6分拨申请 Dispatch_report
+                else if(data.contains("<MessageType>"+MsgType.Dispatch_Ship) || data.contains("<MessageType>"+MsgType.Dispatch_Air))
+                {
+                    manifest = JaxbUtil.xmlToBean(data.replace("xmlns=","bakxmlns="),Manifest.class);
+                    dispatchReportService.save(copMsgId,msgType,manifest);
+                }
+                //7分流申请 Distribute_report
+                else if(data.contains("<MessageType>"+MsgType.Distribute_Ship) || data.contains("<MessageType>"+MsgType.Distribute_Air))
+                {
+                    manifest = JaxbUtil.xmlToBean(data.replace("xmlns=","bakxmlns="),Manifest.class);
+                    distributeReportService.save(copMsgId,msgType,manifest);
+                }
+                //8装箱清单 Packing_report
+                else if(data.contains("<MessageType>"+MsgType.Packing_Ship) )
+                {
+                    manifest = JaxbUtil.xmlToBean(data.replace("xmlns=","bakxmlns="),Manifest.class);
+                    packingReportService.save(copMsgId,msgType,manifest);
+                }
+
+                //9改靠港申请 Change_Port
+                else if(data.contains("<MessageType>"+MsgType.Change_Port_Ship) || data.contains("<MessageType>"+MsgType.Change_Port_Air))
+                {
+                    manifest = JaxbUtil.xmlToBean(data.replace("xmlns=","bakxmlns="),Manifest.class);
+                    changePortService.save(copMsgId,msgType,manifest);
+                }
+                //10直接改配申请 Change_Transport
+                else if(data.contains("<MessageType>"+MsgType.Change_Transport_Ship) || data.contains("<MessageType>"+MsgType.Change_Transport_Air))
+                {
+                    manifest = JaxbUtil.xmlToBean(data.replace("xmlns=","bakxmlns="),Manifest.class);
+                    chgTransportService.save(copMsgId,msgType,manifest);
+                }
+                //11落装申请 Off_Load_apply
+                else if(data.contains("<MessageType>"+MsgType.Off_Load_Ship) || data.contains("<MessageType>"+MsgType.Off_Load_Air))
+                {
+                    manifest = JaxbUtil.xmlToBean(data.replace("xmlns=","bakxmlns="),Manifest.class);
+                    offLoadService.save(copMsgId,msgType,manifest);
+                }
+                //12落装改配申请 Change_Off_Load
+                else if(data.contains("<MessageType>"+MsgType.Change_Transport_Off_Load_Ship) || data.contains("<MessageType>"+MsgType.Change_Transport_Off_Load_Air))
+                {
+                    manifest = JaxbUtil.xmlToBean(data.replace("xmlns=","bakxmlns="),Manifest.class);
+                    offLoadChgService.save(copMsgId,msgType,manifest);
+                }
+                //13国际转运准单 Transfer_Check
+                else if(data.contains("<MessageType>"+MsgType.Transfer_Check_Ship) || data.contains("<MessageType>"+MsgType.Transfer_Check_Air))
+                {
+                    manifest = JaxbUtil.xmlToBean(data.replace("xmlns=","bakxmlns="),Manifest.class);
+                    transferCheckService.save(copMsgId,msgType,manifest);
+                }
+                //14空箱快速验放 EmptyConta
+                else if(data.contains("<MessageType>"+MsgType.EmptyConta_Import) || data.contains("<MessageType>"+MsgType.EmptyConta_Export))
+                {
+                    manifest = JaxbUtil.xmlToBean(data.replace("xmlns=","bakxmlns="),Manifest.class);
+                    emptycontaService.save(copMsgId,msgType,manifest);
                 }
                 else
                 {

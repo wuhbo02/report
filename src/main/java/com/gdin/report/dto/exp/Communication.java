@@ -43,9 +43,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Communication {
 
-    @XmlElement(name = "ID", required = true)
+    @XmlElement(name = "ID")
     protected   String id;
-    @XmlElement(name = "TypeID", required = true)
+    @XmlElement(name = "TypeID")
     protected   String typeID;
 
     /**

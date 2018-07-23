@@ -54,6 +54,7 @@ import javax.xml.bind.annotation.*;
         "supplierPartyTypeCode",
         "fullnessCode",
         "sealIDList",
+        "consignment",
         "damage",
         "transportMeans"
 })
@@ -72,6 +73,18 @@ public class TransportEquipment {
     protected String fullnessCode;
     @XmlElement(name = "SealID")
     protected List<SealID> sealIDList;
+
+    public List<Consignment> getConsignment() {
+        return consignment;
+    }
+
+    public void setConsignment(List<Consignment> consignment) {
+        this.consignment = consignment;
+    }
+
+    @XmlElement(name = "Consignment")
+    protected List<Consignment> consignment;
+
     @XmlElement(name = "Damage")
     protected List<Damage> damage;
     @XmlElement(name = "TransportMeans")

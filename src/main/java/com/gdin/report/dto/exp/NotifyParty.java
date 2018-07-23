@@ -51,11 +51,11 @@ public class NotifyParty {
 
     @XmlElement(name = "ID")
     protected String id;
-    @XmlElement(name = "Name", required = true)
+    @XmlElement(name = "Name")
     protected String name;
-    @XmlElement(name = "Address", required = true)
+    @XmlElement(name = "Address")
     protected NotifypartyAddress address;
-    @XmlElement(name = "Communication", required = true)
+    @XmlElement(name = "Communication")
     protected List<Communication> communication;
 
     /**

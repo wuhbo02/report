@@ -59,7 +59,7 @@ public class Consignee {
     protected   String name;
     @XmlElement(name = "Address")
     protected ConsigneeAddress address;
-    @XmlElement(name = "Communication", required = true)
+    @XmlElement(name = "Communication")
     protected List<Communication> communication;
     @XmlElement(name = "Contact")
     protected Contact contact;

@@ -49,9 +49,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TransportContractDocument {
 
-    @XmlElement(name = "ID", required = true)
+    @XmlElement(name = "ID")
     protected String id;
-    @XmlElement(name = "ChangeReasonCode", required = true)
+    @XmlElement(name = "ChangeReasonCode")
     protected List<String> changeReasonCode;
     @XmlElement(name = "ConditionCode")
     protected String conditionCode;

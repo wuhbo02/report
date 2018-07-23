@@ -49,26 +49,79 @@ import javax.xml.bind.annotation.XmlType;
     "exitCustomsOffice",
     "agent",
     "carrier",
+        "declarationOfficeID",
     "borderTransportMeans",
+        "unloadingLocation",
+        "tallyParty",
     "consignment",
+        "transportEquipmentList",
     "additionalInformation"
 })
 public class Declaration {
 
-    @XmlElement(name = "RepresentativePerson", required = true)
+    @XmlElement(name = "RepresentativePerson")
     protected RepresentativePerson representativePerson;
-    @XmlElement(name = "ExitCustomsOffice", required = true)
+    @XmlElement(name = "ExitCustomsOffice")
     protected ExitCustomsOffice exitCustomsOffice;
     @XmlElement(name = "Agent")
     protected Agent agent;
-    @XmlElement(name = "Carrier", required = true)
+    @XmlElement(name = "Carrier")
     protected Carrier carrier;
-    @XmlElement(name = "BorderTransportMeans", required = true)
+
+    @XmlElement(name = "DeclarationOfficeID")
+    protected String declarationOfficeID;
+
+    @XmlElement(name = "BorderTransportMeans")
     protected BorderTransportMeans borderTransportMeans;
-    @XmlElement(name = "Consignment", required = true)
+
+    @XmlElement(name = "UnloadingLocation")
+    protected UnloadingLocation unloadingLocation;
+
+    @XmlElement(name = "TallyParty")
+    protected Party tallyParty;
+
+    @XmlElement(name = "Consignment")
     protected List<Consignment> consignment;
+
+    @XmlElement(name = "TransportEquipment")
+    protected List<TransportEquipment> transportEquipmentList;
+
     @XmlElement(name = "AdditionalInformation")
     protected AdditionalInformation additionalInformation;
+
+
+
+    public String getDeclarationOfficeID() {
+        return declarationOfficeID;
+    }
+
+    public void setDeclarationOfficeID(String declarationOfficeID) {
+        this.declarationOfficeID = declarationOfficeID;
+    }
+
+    public Party getTallyParty() {
+        return tallyParty;
+    }
+
+    public void setTallyParty(Party tallyParty) {
+        this.tallyParty = tallyParty;
+    }
+
+    public UnloadingLocation getUnloadingLocation() {
+        return unloadingLocation;
+    }
+
+    public void setUnloadingLocation(UnloadingLocation unloadingLocation) {
+        this.unloadingLocation = unloadingLocation;
+    }
+
+    public List<TransportEquipment> getTransportEquipmentList() {
+        return transportEquipmentList;
+    }
+
+    public void setTransportEquipmentList(List<TransportEquipment> transportEquipmentList) {
+        this.transportEquipmentList = transportEquipmentList;
+    }
 
     /**
      * Gets the value of the representativePerson property.

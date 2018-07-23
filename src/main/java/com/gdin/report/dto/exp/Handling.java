@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Handling {
 
-    @XmlElement(name = "InstructionsCodeCode", required = true)
+    @XmlElement(name = "InstructionsCodeCode")
     protected String instructionsCodeCode;
 
     /**

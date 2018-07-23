@@ -148,9 +148,20 @@ public class Consignment {
     protected List<TransportEquipment> transportEquipment;
     @XmlElement(name = "ConsignmentItem")
     protected List<ConsignmentItem> consignmentItem;
-
     @XmlElement(name = "BorderTransportMeans")
     protected List<BorderTransportMeans> borderTransportMeans;
+
+
+
+    public List<BorderTransportMeans> getBorderTransportMeans() {
+        return borderTransportMeans;
+    }
+
+    public void setBorderTransportMeans(List<BorderTransportMeans> borderTransportMeans) {
+        this.borderTransportMeans = borderTransportMeans;
+    }
+
+
 
     /**
      * Gets the value of the transportContractDocument property.

@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class RepresentativePerson {
 
-    @XmlElement(name = "Name", required = true)
+    @XmlElement(name = "Name")
     protected String name;
 
     /**
