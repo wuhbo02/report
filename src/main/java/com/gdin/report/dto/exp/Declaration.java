@@ -51,6 +51,7 @@ import javax.xml.bind.annotation.XmlType;
     "carrier",
         "declarationOfficeID",
     "borderTransportMeans",
+        "changePortOfArrival",
         "unloadingLocation",
         "tallyParty",
     "consignment",
@@ -74,6 +75,9 @@ public class Declaration {
     @XmlElement(name = "BorderTransportMeans")
     protected BorderTransportMeans borderTransportMeans;
 
+    @XmlElement(name = "ChangePortOfArrival")
+    protected ChangePortOfArrival changePortOfArrival;
+
     @XmlElement(name = "UnloadingLocation")
     protected UnloadingLocation unloadingLocation;
 
@@ -89,6 +93,14 @@ public class Declaration {
     @XmlElement(name = "AdditionalInformation")
     protected AdditionalInformation additionalInformation;
 
+
+    public ChangePortOfArrival getChangePortOfArrival() {
+        return changePortOfArrival;
+    }
+
+    public void setChangePortOfArrival(ChangePortOfArrival changePortOfArrival) {
+        this.changePortOfArrival = changePortOfArrival;
+    }
 
 
     public String getDeclarationOfficeID() {
