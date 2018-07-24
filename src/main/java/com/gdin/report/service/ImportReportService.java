@@ -5,6 +5,7 @@ import com.gdin.report.dto.exp.*;
 import com.gdin.report.dto.exp.Consignment;
 import com.gdin.report.entity.*;
 import com.gdin.report.entity.Contact;
+import com.gdin.report.entity.ImportConsignment;
 import com.gdin.report.vo.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,21 @@ public class ImportReportService {
     private  ConsignmentitemEquipmentService consignmentitemEquipmentService;
 
 
+
+    public ImportReport save(ImportInformation importInformation ){
+        ImportReport importReport = new ImportReport();
+
+        //运输工具信息
+        BorderTransportMeans borderTransportMeans = importInformation.getBorderTransportMeans();
+        //舱单传输人
+        RepresentativePerson representativePerson = importInformation.getRepresentativePerson();
+        //原始舱单提（运）单信息
+        com.gdin.report.dto.exp.ImportConsignment consignment = importInformation.getConsignment();
+
+        return  importReport;
+    }
+
+
     @Transactional
     int deleteByPrimaryKey(String importReportId){
         return importReportMapper.deleteByPrimaryKey(importReportId);
@@ -92,41 +108,10 @@ public class ImportReportService {
         //运输工具
         BigDecimal bordertransportmeansId = null;
         BorderTransportMeans borderTransportMeans = declaration.getBorderTransportMeans();
-        if(borderTransportMeans!=null) {
-            Bordertransportmeans entBordertransportmeans = new Bordertransportmeans();
-            entBordertransportmeans.setId(borderTransportMeans.getId());
-            entBordertransportmeans.setJourneyid(borderTransportMeans.getJourneyID());
-            entBordertransportmeans.setTypecode(borderTransportMeans.getTypeCode());
-            entBordertransportmeans.setName(borderTransportMeans.getName());
-            entBordertransportmeans.setFirstarrivallocationid(borderTransportMeans.getFirstArrivalLocationID());
-            entBordertransportmeans.setArrivaldatetime(borderTransportMeans.getArrivalDateTime());
-            entBordertransportmeans.setDeparturedatetime(borderTransportMeans.getDepartureDateTime());
-            entBordertransportmeans.setActualdatetime(borderTransportMeans.getActualDateTime());
-            entBordertransportmeans.setCompleteddatetime(borderTransportMeans.getCompletedDateTime());
-            entBordertransportmeans.setLoadinglocationid(borderTransportMeans.getLoadingLocation()==null?""
-                    :borderTransportMeans.getLoadingLocation().getID());
-            entBordertransportmeans.setUnloadinglocationid(borderTransportMeans.getUnloadingLocation()==null?""
-                    :borderTransportMeans.getUnloadingLocation().getID());
-            entBordertransportmeans.setFreetext(borderTransportMeans.getFreetext());
 
-            //船长，如果有数据
-            Captain captain = borderTransportMeans.getMaster();
-            if(captain!=null && captain.getName()!=null){
-                Contact contactEntiry = new Contact();
-                contactEntiry.setName(captain.getName());
-                Contact contact = contactService.save(contactEntiry,captain.getCommunication());
-                entBordertransportmeans.setMaster(contact.getContactId());
-            }
-
-
-            entBordertransportmeans.setUnloadingdatetime(borderTransportMeans.getUnloading()==null?""
-                    :borderTransportMeans.getUnloading().getUnloadingDatetime());
-            entBordertransportmeans.setDespatchdatetime(borderTransportMeans.getDespatchdatetime());
-            entBordertransportmeans.setCargofacilitylocation(borderTransportMeans.getCargofacilitylocation());
-
-            bordertransportmeansService.insert(entBordertransportmeans);
+        Bordertransportmeans entBordertransportmeans = bordertransportmeansService.save(borderTransportMeans);
+        if(entBordertransportmeans!=null){
             bordertransportmeansId = entBordertransportmeans.getBordertransportmeansId();
-
         }
 
         //报文主表
@@ -152,7 +137,7 @@ public class ImportReportService {
                 //运输合同
                 TransportContractDocument transportContractDocument = consignment.getTransportContractDocument();
                 Transportcontractdocument transportcontractdocumentEnt = transportcontractdocumentService.selectByPrimaryKey(transportContractDocument.getID());
-                if(transportcontractdocumentEnt==null || transportcontractdocumentEnt.getTransportcontractdocumentId()==null){
+                if(transportcontractdocumentEnt==null && transportContractDocument!=null){
                     transportcontractdocumentEnt = new Transportcontractdocument();
                     transportcontractdocumentEnt.setTransportcontractdocumentId(transportContractDocument.getID());
                     transportcontractdocumentEnt.setConditioncode(transportContractDocument.getConditionCode());

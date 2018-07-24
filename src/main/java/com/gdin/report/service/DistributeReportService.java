@@ -157,7 +157,7 @@ public class DistributeReportService {
                 //运输合同
                 TransportContractDocument transportContractDocument = consignment.getTransportContractDocument();
                 Transportcontractdocument transportcontractdocumentEnt = transportcontractdocumentService.selectByPrimaryKey(transportContractDocument.getID());
-                if(transportcontractdocumentEnt==null || transportcontractdocumentEnt.getTransportcontractdocumentId()==null){
+                if(transportcontractdocumentEnt==null && transportContractDocument!=null){
                     transportcontractdocumentEnt = new Transportcontractdocument();
                     transportcontractdocumentEnt.setTransportcontractdocumentId(transportContractDocument.getID());
                     transportcontractdocumentEnt.setConditioncode(transportContractDocument.getConditionCode());

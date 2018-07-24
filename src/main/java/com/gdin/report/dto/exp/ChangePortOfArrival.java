@@ -43,9 +43,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class ChangePortOfArrival {
 
-    @XmlElement(name = "JourneyID", required = true)
+    @XmlElement(name = "JourneyID")
     protected String journeyID;
-    @XmlElement(name = "UnloadingLocation", required = true)
+    @XmlElement(name = "UnloadingLocation")
     protected UnloadingLocation unloadingLocation;
 
     /**

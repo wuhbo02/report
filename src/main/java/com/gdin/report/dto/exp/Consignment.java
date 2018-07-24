@@ -94,7 +94,8 @@ import javax.xml.bind.annotation.*;
         "undgContact",
         "transportEquipment",
         "consignmentItem",
-        "borderTransportMeans"
+        "borderTransportMeans",
+        "changeConsignment"
 })
 public class Consignment {
 
@@ -151,6 +152,8 @@ public class Consignment {
     @XmlElement(name = "BorderTransportMeans")
     protected List<BorderTransportMeans> borderTransportMeans;
 
+    @XmlElement(name = "ChangeConsignment")
+    protected ChangeConsignment changeConsignment;
 
 
     public List<BorderTransportMeans> getBorderTransportMeans() {
@@ -161,7 +164,13 @@ public class Consignment {
         this.borderTransportMeans = borderTransportMeans;
     }
 
+    public ChangeConsignment getChangeConsignment() {
+        return changeConsignment;
+    }
 
+    public void setChangeConsignment(ChangeConsignment changeConsignment) {
+        this.changeConsignment = changeConsignment;
+    }
 
     /**
      * Gets the value of the transportContractDocument property.

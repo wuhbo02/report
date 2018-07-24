@@ -51,11 +51,13 @@ import javax.xml.bind.annotation.XmlType;
     "carrier",
         "declarationOfficeID",
     "borderTransportMeans",
+        "changeBorderTransportMeans",
         "changePortOfArrival",
         "unloadingLocation",
         "tallyParty",
     "consignment",
         "transportEquipmentList",
+        "relation",
     "additionalInformation"
 })
 public class Declaration {
@@ -75,6 +77,9 @@ public class Declaration {
     @XmlElement(name = "BorderTransportMeans")
     protected BorderTransportMeans borderTransportMeans;
 
+    @XmlElement(name = "ChangeBorderTransportMeans")
+    protected BorderTransportMeans changeBorderTransportMeans;
+
     @XmlElement(name = "ChangePortOfArrival")
     protected ChangePortOfArrival changePortOfArrival;
 
@@ -90,9 +95,20 @@ public class Declaration {
     @XmlElement(name = "TransportEquipment")
     protected List<TransportEquipment> transportEquipmentList;
 
+    @XmlElement(name = "Relation")
+    protected List<Relation> relation;
+
     @XmlElement(name = "AdditionalInformation")
     protected AdditionalInformation additionalInformation;
 
+
+    public List<Relation> getRelation() {
+        return relation;
+    }
+
+    public void setRelation(List<Relation> relation) {
+        this.relation = relation;
+    }
 
     public ChangePortOfArrival getChangePortOfArrival() {
         return changePortOfArrival;
@@ -100,6 +116,14 @@ public class Declaration {
 
     public void setChangePortOfArrival(ChangePortOfArrival changePortOfArrival) {
         this.changePortOfArrival = changePortOfArrival;
+    }
+
+    public BorderTransportMeans getChangeBorderTransportMeans() {
+        return changeBorderTransportMeans;
+    }
+
+    public void setChangeBorderTransportMeans(BorderTransportMeans changeBorderTransportMeans) {
+        this.changeBorderTransportMeans = changeBorderTransportMeans;
     }
 
 

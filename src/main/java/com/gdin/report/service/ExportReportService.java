@@ -1,11 +1,11 @@
 package com.gdin.report.service;
 
 import com.gdin.report.dao.ExportReportMapper;
-import com.gdin.report.dao.ImportReportMapper;
 import com.gdin.report.dto.exp.*;
 import com.gdin.report.dto.exp.Consignment;
 import com.gdin.report.entity.*;
 import com.gdin.report.entity.Contact;
+import com.gdin.report.entity.ExportConsignment;
 import com.gdin.report.vo.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -151,7 +151,7 @@ public class ExportReportService {
                 //运输合同
                 TransportContractDocument transportContractDocument = consignment.getTransportContractDocument();
                 Transportcontractdocument transportcontractdocumentEnt = transportcontractdocumentService.selectByPrimaryKey(transportContractDocument.getID());
-                if(transportcontractdocumentEnt==null || transportcontractdocumentEnt.getTransportcontractdocumentId()==null){
+                if(transportcontractdocumentEnt==null && transportContractDocument!=null){
                     transportcontractdocumentEnt = new Transportcontractdocument();
                     transportcontractdocumentEnt.setTransportcontractdocumentId(transportContractDocument.getID());
                     transportcontractdocumentEnt.setConditioncode(transportContractDocument.getConditionCode());

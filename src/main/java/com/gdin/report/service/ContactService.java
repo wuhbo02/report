@@ -66,8 +66,8 @@ public class ContactService {
             return record;
         }
         if(record.getContactId()==null){
-            int num = (int) (Math.random() * 2000);
-            String randomstr = DateUtils.parseDateToString(new Date(),"yyyyMMddHHmmssSS")+num;
+            int num = (int)(Math.random()*(9999-1000+1))+1000;
+            String randomstr = DateUtils.parseDateToString(new Date(),"yyyyMMddHHmmsss")+num;
             record.setContactId(randomstr);
         }
 
